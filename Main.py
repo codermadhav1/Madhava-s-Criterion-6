@@ -5,22 +5,22 @@ import tkinter as tk
 from tkinter import messagebox
 # UDF stands for user database file for the passwords and usernames of this application
 UDF = "users.csv"
-# basically means if the file or folder doesn not exists it will create the file with the username and password columns in the 
+# basically means if the file or folder doesn not exists it will create the file with the username and password columns in the csv file
 if not os.path.exists(UDF):
     with open(UDF, 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(["username", "password"])
-
+# this is the calss that opens the login page & main menu and all the application that can be accessed through the main menu
 class App(tk.Tk):
-    def __init__(self):
+    def __init__(self): # 
         super().__init__()
-        self.title("Priority app")
-        self.geometry("500x450")
-        self.configure(bg="#00636e")
+        self.title("Priority app") # The titel of the window that will appear in the top left along with the os
+        self.geometry("500x450") # the size of the login page window and the creation of ascount
+        self.configure(bg="#00636e") # The background color of the login page
 
-        self.current_user = None
+        self.current_user = None # no one is logged data.
 
-        self.login_page()
+        self.login_page() # calls the login page
 
     def clean_open(self):
         for widget in self.winfo_children():
