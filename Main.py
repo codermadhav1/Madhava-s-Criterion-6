@@ -18,30 +18,30 @@ class App(tk.Tk):
         self.geometry("500x450") # the size of the login page window and the creation of ascount
         self.configure(bg="#00636e") # The background color of the login page
 
-        self.current_user = None # no one is logged data.
+        self.current_user = None # no one is logged data
 
         self.login_page() # calls the login page
-
+# clean the window so that it is fresh every time i do enter the window
     def clean_open(self):
-        for widget in self.winfo_children():
+        for widget in self.winfo_children(): # completely clears or resets a specific section of the gui
             widget.destroy()
     
-    def login_page(self):
-        self.clean_open()
+    def login_page(self): # the login page being created so it appears first
+        self.clean_open() # clears the elemetns of the gui
 
-        self.configure(bg="#00636e")
+        self.configure(bg="#00636e") # background of the login page
 
-        header_frame = tk.Frame(self, bg="#00636e")
-        header_frame.pack(fill="x", padx=10, pady=(5, 0))
+        header_frame = tk.Frame(self, bg="#00636e") # basically the top part of the login page with the faq and logo's background
+        header_frame.pack(fill="x", padx=10, pady=(5, 0)) # the layout of the top bar as it is seperate from the login pgae
 
-        header_frame.grid_columnconfigure(0, weight=1)
-        header_frame.grid_columnconfigure(1, weight=1)
+        header_frame.grid_columnconfigure(0, weight=1) # basically the placeholders for the elemets so they share the same amount of the gui 
+        header_frame.grid_columnconfigure(1, weight=1) # they are split evenly so they are perfect layout placheloders
         header_frame.grid_columnconfigure(2, weight=1)
 
         # new thing i found was this hasattr which is short for has attribute basically checks if an object contains a specific atrribute or method.
         if not hasattr(self, 'FAQ_icon'):
             try:
-                self.FAQ_icon = tk.PhotoImage(file="FAQbutton.png")
+                self.FAQ_icon = tk.PhotoImage(file="FAQbutton.png") # the picture for the faq button
             except tk.TclError:
                 self.FAQ_icon = None
         
