@@ -42,33 +42,33 @@ class App(tk.Tk):
         if not hasattr(self, 'FAQ_icon'):
             try:
                 self.FAQ_icon = tk.PhotoImage(file="FAQbutton.png") # the picture for the faq button
-            except tk.TclError:
+            except tk.TclError: #If it doesnt load it will automatically give an error message and show nothin
                 self.FAQ_icon = None
         
-        if not hasattr(self, 'logo'):
+        if not hasattr(self, 'logo'): # same thing as above but this time for the logo thats on the login page
             try:
-                self.logo = tk.PhotoImage(file="logo.png")
+                self.logo = tk.PhotoImage(file="logo.png") # the image file for the logo to appear on the login page
             except tk.TclError:
-                self.logo = None
+                self.logo = None # if it doesnt load same thing as the one for the faq icon it wont load and it will show error message
 
         if self.logo:
-            logo_label = tk.Label(header_frame, image=self.logo, bg="#00636e")
-            logo_label.grid(row=0, column=1, pady=5)
+            logo_label = tk.Label(header_frame, image=self.logo, bg="#00636e") # a seperate frame for the logo and the background same as other
+            logo_label.grid(row=0, column=1, pady=5) # the positioning of this frame
 
         FAQ_button = tk.Button(header_frame, image=self.FAQ_icon, font=("Calibri", 10,"bold"), bg="#00ccd1", fg="white",
-                                     command=self.open_FAQ_file)
-        FAQ_button.grid(row=0, column=2, sticky="e", pady=5)        
+                                     command=self.open_FAQ_file) # the btton for the faw button in the top right and the colors and action it will do
+        FAQ_button.grid(row=0, column=2, sticky="e", pady=5) # the positionf of the botton in top right took me some time this one 
         
-        label_title = tk.Label(self, text="Time to focus?", font=("Calibri", 25, "bold"), bg="#00636e", fg="#ffffff")
-        label_title.pack(pady=(0, 5))
-        
-        tk.Label(self, text="Username", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50)
-        self.username = tk.Entry(self, font=("Calibri", 12),)
-        self.username.pack(fill="x", padx=50, pady=(2, 5))
-
-        tk.Label(self, text="Password", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50)
-        self.password = tk.Entry(self, font=("Calibri", 12),)
-        self.password.pack(fill="x", padx=50, pady=(2, 10))
+        label_title = tk.Label(self, text="Time to focus?", font=("Calibri", 25, "bold"), bg="#00636e", fg="#ffffff") # the title of the window and the color that is the title in the top middle of the screen
+        label_title.pack(pady=(0, 5)) # positiong of this
+        # the username title above the user entry for the username
+        tk.Label(self, text="Username", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # alsong with the psotion of this label
+        self.username = tk.Entry(self, font=("Calibri", 12),) # the user entry textbox so the user can enter their user name
+        self.username.pack(fill="x", padx=50, pady=(2, 5)) # the positiong of this box
+        # the password title above the password entry
+        tk.Label(self, text="Password", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # the creation of this password label and also the colors position of it
+        self.password = tk.Entry(self, font=("Calibri", 12),) # creating the textbox of the password field
+        self.password.pack(fill="x", padx=50, pady=(2, 10)) # positioning of the password box
 
         login_button = tk.Button(self, text="Login", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
                                 command=self.handle_login)
