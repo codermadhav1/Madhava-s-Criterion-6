@@ -23,7 +23,7 @@ class App(tk.Tk):
         self.login_page() # calls the login page
 # clean the window so that it is fresh every time i do enter the window
     def clean_open(self):
-        for widget in self.winfo_children(): # completely clears or resets a specific section of the gui
+        for widget in self.winfo_children(): # completely clears or resets a specific section of the gui so frees memeory to speed up the processes
             widget.destroy()
     
     def login_page(self): # the login page being created so it appears first
@@ -69,127 +69,127 @@ class App(tk.Tk):
         tk.Label(self, text="Password", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # the creation of this password label and also the colors position of it
         self.password = tk.Entry(self, font=("Calibri", 12),) # creating the textbox of the password field
         self.password.pack(fill="x", padx=50, pady=(2, 10)) # positioning of the password box
-
+        # this is for the login button and the creattion of it on the main menu page
         login_button = tk.Button(self, text="Login", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
                                 command=self.handle_login)
-        login_button.pack(fill="x", padx=50, pady=5)
+        login_button.pack(fill="x", padx=50, pady=5) # the positioning of the login button on the main menu page
 
         #CU_button stands for the create user button
         CU_Button = tk.Button(self, text="Create Account", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
-                                command=self.CU_page)
-        CU_Button.pack(fill="x", padx=50, pady=5)
+                                command=self.CU_page) # the creation of the create user button and also the command which is further down
+        CU_Button.pack(fill="x", padx=50, pady=5) # positioining of the create user button
 
-    def CU_page(self):
-        self.clean_open()
-        label_title = tk.Label(self, text="Create an acoount here!", font=("Calibri", 25, "bold"), bg="#6ba1c7", fg="#b8c5ce")
-        label_title.pack(pady=(40,20))
+    def CU_page(self): # this is the page that opens when create account button is clicked
+        self.clean_open() # clears the elements if something else is sitll there
+        label_title = tk.Label(self, text="Create an account here!", font=("Calibri", 25, "bold"), bg="#6ba1c7", fg="#b8c5ce") # the creation of the title of the top of the page
+        label_title.pack(pady=(40,20)) # the positioning of the title for the page
 
-        tk.Label(self, text="Create an Username", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50)
-        self.username = tk.Entry(self, font=("Calibri", 12))
-        self.username.pack(fill="x", padx=50, pady=(5, 15))
+        tk.Label(self, text="Create an Username", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # the words beside the user entry field to enter a new userna,e
+        self.username = tk.Entry(self, font=("Calibri", 12)) # the entry box next to create username: so the user can type their new username
+        self.username.pack(fill="x", padx=50, pady=(5, 15)) # positiong
 
-        tk.Label(self, text="Create a Password", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50)
-        self.password = tk.Entry(self, font=("Calibri", 12),)
-        self.password.pack(fill="x", padx=50, pady=(5, 20))
+        tk.Label(self, text="Create a Password", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # same thing as above but for password
+        self.password = tk.Entry(self, font=("Calibri", 12),) # same as above but for passoerd
+        self.password.pack(fill="x", padx=50, pady=(5, 20)) # positiong of the entry 
 
         register = tk.Button(self, text="Sign Up", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
-                                command=self.handle_register)
-        register.pack(fill="x", padx=50, pady=10)
-
+                                command=self.handle_register) # register button 
+        register.pack(fill="x", padx=50, pady=10) # positioning of the register button
+        # cu stands for create user but i i realise now i shouldvbe called it like go back button or msthn like that
         CU_Button = tk.Button(self, text="Already got one!", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
-                                command=self.login_page)
-        CU_Button.pack(fill="x", padx=50, pady=10)
+                                command=self.login_page) # the button to go back login page in case the user already has an account that they can use
+        CU_Button.pack(fill="x", padx=50, pady=10) # positioning of back button
 
-    def main_menu(self):
-        self.clean_open()
-        self.geometry("700x500")
-        self.configure(bg="#ffffff")
+    def main_menu(self): # the openinig of the main menu after the login page
+        self.clean_open() # clears the page
+        self.geometry("700x500") # size of the maine menu page
+        self.configure(bg="#ffffff") # backgroudn of the main menu page
 
 
-        try:
-            self.FAQ_icon = tk.PhotoImage(file="FAQbutton.png")
-            self.Settings_icon = tk.PhotoImage(file="Settingsbutton.png")
-            self.picon = tk.PhotoImage(file="Prioritiesbutton.png")
-            self.aicon = tk.PhotoImage(file="ATARButton.png")
-            self.UEicon = tk.PhotoImage(file="UEbutton.png")
-        except tk.TclError:
-            messagebox.showerror("Error 1: madhava has forgotten to put correct image files!")
+        try: # images for the various icons that are present
+            self.FAQ_icon = tk.PhotoImage(file="FAQbutton.png") # faq icon
+            self.Settings_icon = tk.PhotoImage(file="Settingsbutton.png") # settings icon
+            self.picon = tk.PhotoImage(file="Prioritiesbutton.png") # priorities icon
+            self.aicon = tk.PhotoImage(file="ATARButton.png") # atar icon
+            self.UEicon = tk.PhotoImage(file="UEbutton.png") # upcoming events icon
+        except tk.TclError: # error if the images arent in the correct place
+            messagebox.showerror("Error 1: madhava has forgotten to put correct image files!") # this error can be entered in the error form in faq page
             return
 
-        self.grid_columnconfigure(0, weight=1, uniform="main_feats")
+        self.grid_columnconfigure(0, weight=1, uniform="main_feats") # creating a makeshift grid so the buttons dont mess up and get even spacing
         self.grid_columnconfigure(1, weight=1, uniform="main_feats")
         self.grid_columnconfigure(2, weight=1, uniform="main_feats")
 
-        self.grid_rowconfigure(0, weight=0)
+        self.grid_rowconfigure(0, weight=0) # same thing but for the rows
         self.grid_rowconfigure(2, weight=1)
         self.grid_rowconfigure(3, weight=0)
 
-        top_bar = tk.Frame(self, bg="#ffffff")
-        top_bar.grid(row=0, column=0, columnspan=3, sticky="ew", padx=20, pady=10)
+        top_bar = tk.Frame(self, bg="#ffffff") # the bar with the logo, welcom message settings button and faq button
+        top_bar.grid(row=0, column=0, columnspan=3, sticky="ew", padx=20, pady=10) # the positiong of this
 
-        logo_welcome = tk.Frame(top_bar, bg="#ffffff")
-        logo_welcome.pack(side="left", anchor="w")
+        logo_welcome = tk.Frame(top_bar, bg="#ffffff") #the logo and welcome message container so they are together
+        logo_welcome.pack(side="left", anchor="w") # positiong
 
-        if self.logo:
-            mm_logo = tk.Label(top_bar, image=self.logo, bg="#ffffff")
-            mm_logo.pack(side="left", padx=(0,10))
+        if self.logo: # the logo in the top left having the same background of the main menu
+            mm_logo = tk.Label(top_bar, image=self.logo, bg="#ffffff") # cretion of this mm stands for main menu
+            mm_logo.pack(side="left", padx=(0,10)) # positoning
 
-        welcome_message = f"Welcome, {self.current_user if self.current_user else 'Error 2'}!"
+        welcome_message = f"Welcome, {self.current_user if self.current_user else 'Error 2'}!" # welcome message that willbe next to the logo and will give error if something breaks
         welcome_label = tk.Label(top_bar, text=welcome_message, font=("Calibri", 14, "bold"),
-                                 bg="#ffffff", fg="#00636e")
-        welcome_label.pack(side="left")
+                                 bg="#ffffff", fg="#00636e") # the color and text creation
+        welcome_label.pack(side="left") # positioning
 
-        faq_sttg = tk.Frame(top_bar, bg="#ffffff")
-        faq_sttg.pack(side="right", anchor="e")
+        faq_sttg = tk.Frame(top_bar, bg="#ffffff") # faq and setting container
+        faq_sttg.pack(side="right", anchor="e") # position of this
         settings_button = tk.Button(faq_sttg, image=self.Settings_icon, font=("Calibri", 10,"bold"), bg="#00ccd1", fg="white",
-                                     command=self.open_settings_file)
-        settings_button.pack(side="right", padx=(5, 0))
+                                     command=self.open_settings_file) # creating the settings button only accesible in the main menu
+        settings_button.pack(side="right", padx=(5, 0)) # the positon og it
 
         FAQ_button = tk.Button(faq_sttg, image=self.FAQ_icon, font=("Calibri", 10,"bold"), bg="#00ccd1", fg="white",
-                                     command=self.open_FAQ_file)
-        FAQ_button.pack(side="right", padx=(5, 0))
+                                     command=self.open_FAQ_file) # creating the faq button on the main menu
+        FAQ_button.pack(side="right", padx=(5, 0)) # the postion
 
-        # pbtn stands for priority button just to simplify it i made it like this
+        # pbtn stands for priority button just to simplify it i made it like this this is the creation of it
         pbtn = tk.Button(self, image=self.picon, text="\nPriorities", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
-                                    activebackground="#00a3a6", activeforeground="white", compound="top", command=self.priorities)
+                                    activebackground="#00a3a6", activeforeground="white", compound="top", command=self.priorities) # here i use activeforegoud which is wehen it is clicked it will show that color
         pbtn.grid(row=2, column=0, sticky="nsew", padx=20,  pady=20)
 
-        #abtn stands for ATAR Calculator butotn for the same reason as above
+        #abtn stands for ATAR Calculator butotn for the same reason as above creation of it
         abtn = tk.Button(self, image=self.aicon, text="\nATAR Calculator", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
                                     activebackground="#00a3a6", activeforeground="white", compound="top", command=self.atar_calc)
         abtn.grid(row=2, column=1, sticky="nsew", padx=20,  pady=20)
 
-        # UEbtn stands for upcoming events for a reason i think is quite well known.
+        # UEbtn stands for upcoming events button for a reason i think is quite well known. creation of it
         UEbtn = tk.Button(self, image=self.UEicon, text="\nUpcoming Events", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
                                     activebackground="#00a3a6", activeforeground="white", compound="top", command=self.events_p)
         UEbtn.grid(row=2, column=2, sticky="nsew", padx=20,  pady=20)
-
+        # logout button creation of it
         logout_button = tk.Button(self, text="Log out", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
                                 activebackground="#00a3a6", activeforeground="white", command=self.handle_logout)
         logout_button.grid(row=3, column=0, sticky="nw", padx=20, pady=20)
+    # from here onwards it is making hte commands from the various button and various text entrys work
+    def open_FAQ_file(self): # the if faq button is clicked this makes it go there
+        self.clean_open() # clears anything that might be in the way
+        import FAQPage # opens the faq page python file
 
-    def open_FAQ_file(self):
-        self.clean_open()
-        import FAQPage
+        arrivalPage = "main_menu" if self.current_user else "login" # this is so it is accessibile from the login page if user is not signed in or accesible from manin menu if logged in
+        FAQPage.load_FAQ_page(self, arrivalPage) # i make sure this is the case because before if faq page was in it could bypass login
 
-        arrivalPage = "main_menu" if self.current_user else "login"
-        FAQPage.load_FAQ_page(self, arrivalPage)
-
-    def open_settings_file(self):
-        self.clean_open()
+    def open_settings_file(self): # this is command creation of what to do once the button is clicked in the main menu
+        self.clean_open() # clears the memory and any wifget for speed which is a non functional requirement
         
-        import SettingsPage
+        import SettingsPage # the python file will open if the setting button is clicked
 
-        SettingsPage.load_settings_page(self)
+        SettingsPage.load_settings_page(self) # displays it
 
-    def priorities(self):
+    def priorities(self): # priorites command creation so when its button is clicked it leads to the gfile
         self.clean_open()
 
-        import Priorities
+        import Priorities # the python file for this
 
-        Priorities.load_priorities_page(self)
+        Priorities.load_priorities_page(self) # diaplays it
 
-    def atar_calc(self):
+    def atar_calc(self): # same but for atar calculator function
         self.clean_open()
 
         import ATAR_Calculator
@@ -197,7 +197,7 @@ class App(tk.Tk):
         ATAR_Calculator.load_atar_page(self)
 
 
-    def events_p(self):
+    def events_p(self): # same aas last two but fro upcoming events
         self.clean_open()
 
         import UEPage
@@ -208,54 +208,54 @@ class App(tk.Tk):
         # the c stands for correct
         cusername = self.username.get().strip()
         cpassword = self.password.get().strip()
-
+        # input validation for the login
         if not cusername or not cpassword:
-            messagebox.showwarning("error", "wrong you have to enter everything")
-            return
+            messagebox.showwarning("error 2", "wrong user or password or you have to enter everything") # error message 
         
-        valid_user = False
-        with open(UDF, mode='r') as file:
+        valid_user = False # i set it to false so if it is empty it wont let them through unless it is in the udf.csv file
+        with open(UDF, mode='r') as file: # checks the file
             reader = csv.DictReader(file)
             for row in reader:
                 if row ['username'] == cusername and row['password'] == cpassword:
-                    valid_user = True
+                    valid_user = True # if the username and password match those in that csv file it will allow the user through
                     break
 
         if valid_user:
-            self.current_user = cusername
-            self.main_menu()
+            self.current_user = cusername # this is so it saves it as the change username as well and also the welcome message is addressed to this name
+            self.main_menu() # calling the main menu
         else:
-            messagebox.showerror("Wrong something", "Invalid username or password fix it to enter.")
+            messagebox.showerror("something is wrong (error 2.5)", "Invalid username or password fix it to enter.") # i had to use 2.5 because i used 2 and 3 already before fixing it
+            return
     
-    def handle_register(self):
+    def handle_register(self): # for the register page it changes the correct user name and password when the user updates their credentials
         cusername = self.username.get().strip()
         cpassword = self.password.get().strip()
-
+        # c stands for correct
         if not cusername or not cpassword:
-            messagebox.showwarning("Error","no blanks")
+            messagebox.showwarning("Error 2.75","no blanks") # once again i used 2 and 3 alr so i have to used 2.5 and 2.75
             return
         
-        with open(UDF, mode='r') as file:
+        with open(UDF, mode='r') as file: # this is to read the udf file and opens in read mode to check if a username is alr in use
             reader = csv.DictReader(file)
             for row in reader:
                 if row['username'] == cusername:
-                    messagebox.showerror("invalid", "username already in use")
+                    messagebox.showerror("invalid", "username already in use") # error message to tell user they cant have the same username as someone else
                     return
                 
-        with open(UDF, mode='a', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerow([cusername, cpassword])
+        with open(UDF, mode='a', newline='') as file: # same as above but this time for the successful account creation and saves it there
+            writer = csv.writer(file) # creates a writer object that formats and writes into a csv file
+            writer.writerow([cusername, cpassword]) # puts its according as either the correct username or password
 
-        messagebox.showinfo("success", "account created")
-        self.login_page()
+        messagebox.showinfo("success", "account created") # success message once the accound is created
+        self.login_page() # calls the login page once account is created
 
-    def handle_logout(self):
-        self.clean_open()
-        self.current_user = None
-        self.geometry("500x450")
-        self.configure(bg="#00636e")
-        self.login_page()
-
+    def handle_logout(self): # this is when the logout button is clikec
+        self.clean_open() # clears cahce and speeds it up a bit by clearing extra widgets
+        self.current_user = None # sets logged in user to no one
+        self.geometry("500x450") # back to login page dimensions
+        self.configure(bg="#00636e") # background color
+        self.login_page() # calls login page
+# the end of the main this and runs the loop its only at the bottom of this python file because i didnt require it for the other files
 if __name__ == "__main__":
     app = App()
     app.mainloop()
