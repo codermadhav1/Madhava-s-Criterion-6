@@ -53,7 +53,7 @@ class App(tk.Tk):
 
         if self.logo:
             logo_label = tk.Label(header_frame, image=self.logo, bg="#00636e") # a seperate frame for the logo and the background same as other
-            logo_label.grid(row=0, column=1, pady=5) # the positioning of this frame
+            logo_label.grid(row=0, column=1, pady=5) # the positioning of this frame and size 
 
         FAQ_button = tk.Button(header_frame, image=self.FAQ_icon, font=("Calibri", 10,"bold"), bg="#00ccd1", fg="white",
                                      command=self.open_FAQ_file) # the btton for the faw button in the top right and the colors and action it will do

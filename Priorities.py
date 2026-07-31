@@ -1,5 +1,5 @@
-import tkinter as tk
-import csv
+import tkinter as tk # these are the librabries for the priorities page of the application
+import csv # csv is imported because it saves to the csv file 
 from tkinter import messagebox, ttk
 import os
 from datetime import datetime
