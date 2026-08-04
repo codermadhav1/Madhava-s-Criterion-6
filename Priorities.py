@@ -48,26 +48,26 @@ def load_priorities_page(app, arrivalPage="main_menu"): # the connection between
     date_entry.insert(0, "31/12/2026") # sets the due date to 31 december 2026
     date_entry.pack(fill="x", pady=(0,20)) # stretch and padding
 
-    columns = ("task", "difficulty", "proximity", "priority", "raw_date") # the commands for the headers 
-    priorityt = ttk.Treeview(right1, columns=columns, show="headings", selectmode="browse")
+    columns = ("task", "difficulty", "proximity", "priority", "raw_date") # the commands for the headers in the table
+    priorityt = ttk.Treeview(right1, columns=columns, show="headings", selectmode="browse") # creating the table to display the 5 headrs above
 
-    priorityt.column("task", width=150, anchor="w")
-    priorityt.column("difficulty", width=100, anchor="center")
-    priorityt.column("proximity", width=100, anchor="center")
-    priorityt.column("priority", width=100, anchor="center")
-    priorityt.column("raw_date", width=0, stretch=False)
-    priorityt.pack(fill="both", expand=True)
+    priorityt.column("task", width=150, anchor="w") # the width of the task header and the position + title
+    priorityt.column("difficulty", width=100, anchor="center") #  the width of the task header and the position + title
+    priorityt.column("proximity", width=100, anchor="center") # the width of the task header and the position + title
+    priorityt.column("priority", width=100, anchor="center") # the width of the task header and the position + title
+    priorityt.column("raw_date", width=0, stretch=False) # which is non existent because i dont want people to see this one
+    priorityt.pack(fill="both", expand=True) # the stretch and is allowed to expand when i fullscreen the gui
 
-    def sort_by(col, reverse):
-        dlist = []
-        for k in priorityt.get_children(""):
-            value = priorityt.set(k, col)
-            value = float(value) if col in ["difficulty", "priority"] else (int(value.split()[0]) if col == "proximity" else value)
-            dlist.append((value, k))
-        dlist.sort(reverse=reverse)
-        for index, (value, k) in enumerate(dlist):
-            priorityt.move(k, "", index)
-        priorityt.heading(col, command=lambda: sort_by(col, not reverse))
+    def sort_by(col, reverse):# this is creatung the sort by highest to lowest for all the headings so the user can click it and it will sort it
+        dlist = [] # this is creating an initially empty list
+        for k in priorityt.get_children(""): # a for loop to iterate through the items of this table
+            value = priorityt.set(k, col) # represents the call and reoresetbs to set to the priority
+            value = float(value) if col in ["difficulty", "priority"] else (int(value.split()[0]) if col == "proximity" else value) # making it sort by these columns
+            dlist.append((value, k)) # groups the variables as a tuple and makes it into an immutable pair
+        dlist.sort(reverse=reverse) # this is the way to sort them if it is false it will sort ascending and the opposite if it is true
+        for index, (value, k) in enumerate(dlist): # a loop through a collection whilst tracking the index number
+            priorityt.move(k, "", index) #to move the elements in relation to their value & index
+        priorityt.heading(col, command=lambda: sort_by(col, not reverse)) # 
     for col, title in [("task", "Task name"), ("difficulty", "Difficulty score"), ("proximity", "Proximity (days)"), ("priority", "Priority score")]:
         priorityt.heading(col, text=f"{title}", command=lambda c=col: sort_by(c, False))
     
