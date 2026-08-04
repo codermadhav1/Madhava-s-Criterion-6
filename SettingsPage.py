@@ -18,7 +18,7 @@ def load_settings_page(app, arrivalPage="main_menu"):
 
     home_click = tk.Button(home_title, text="home", font=("Calibri", 11, "bold"),
                            bg="#00ccd1", fg="white", command=home_back) # same as faqpage
-    home_click.pack(side="left")
+    home_click.pack(side="left") # the position of this
 
     FAQTitle = tk.Label(home_title, text="Settings", font=("Calibri", 18, "bold"), bg="#6ba1c7", fg="#00636e")
     FAQTitle.pack(side="left", padx=20) # same as faq page python file except the title which is 'settings' for this one
@@ -26,11 +26,11 @@ def load_settings_page(app, arrivalPage="main_menu"):
     tk.Label(app, text="Change to new username:").pack(anchor="w", padx=20)
     Uupdate = tk.Entry(app) # uupdate means user update
     Uupdate.insert(0, app.current_user if app.current_user else "") # adds a user to the csv file
-    Uupdate.pack(fill="x", padx=20, pady=5) # size of the text box
+    Uupdate.pack(fill="x", padx=20, pady=5) # padding and strecth
 
     tk.Label(app, text="Change to new password:").pack(anchor="w", padx=20) # same but for password
     pupdate = tk.Entry(app) # pupdate means password update so the user can change their password here
-    pupdate.pack(fill="x", padx=20, pady=5) # size of textbox
+    pupdate.pack(fill="x", padx=20, pady=5) # size of textbox and padding
 
     def credupd():# credupd stands for credential update
         newu = Uupdate.get().strip() # newu is new username so it updates it 
@@ -63,4 +63,4 @@ def load_settings_page(app, arrivalPage="main_menu"):
         app.main_menu() # calls main menu
 
 
-    tk.Button(app, text="Save", command=credupd, bg="#00ccd1", fg="white").pack(pady=10) # size of the save button and creates a save button that updates the credentaisl
+    tk.Button(app, text="Save", command=credupd, bg="#00ccd1", fg="white").pack(pady=10) # padding of the button and creates a save button that updates the credentaisl

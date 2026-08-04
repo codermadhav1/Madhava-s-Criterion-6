@@ -5,7 +5,7 @@ def load_FAQ_page(app, arrivalPage="main_menu"): # this is the configuration of 
     app.configure(bg="#6ba1c7") # backhground of this
 
     home_title = tk.Frame(app, bg="#6ba1c7") # creates a frame for the back to home button and the title container
-    home_title.pack(fill="x", padx=20, pady=10) # positiong
+    home_title.pack(fill="x", padx=20, pady=10) # padding
 
     def home_back(): # take the user back to main menu unless if something breaks in which will go back to loign page
         if arrivalPage == "main_menu":
@@ -18,13 +18,13 @@ def load_FAQ_page(app, arrivalPage="main_menu"): # this is the configuration of 
     home_click.pack(side="left") # position of this button
 
     FAQTitle = tk.Label(home_title, text="Frequently Asked Questions", font=("Calibri", 18, "bold"), bg="#6ba1c7", fg="#00636e") # title of this function appearing at the top
-    FAQTitle.pack(side="left", padx=20) # positioning
+    FAQTitle.pack(side="left", padx=20) # positioning & padding
 
     contents = tk.Frame(app, bg="#6ba1c7") # creating a frame to hold all the question and answers in the faq page
     contents.pack(fill="both", expand=True, padx=20, pady=20) # positioning
     # question1 all questions and answers follow the same layout
     q1 = tk.Label(contents, text="Q1. How do i report an error or request for help or give feedback/comment?", font=("Calibri", 12, 'bold'), bg="#ffffff", fg="#000000")
-    q1.pack(anchor="w", pady=(10,2))
+    q1.pack(anchor="w", pady=(10,2)) # padding
     # answer 1
     a1 = tk.Label(contents, text="A1. Click here", font=("Calibri", 12, "underline"), bg="#ffffff", fg="#0000ee")
     a1.pack(anchor="w", pady=(10,2))

@@ -1,54 +1,54 @@
 import tkinter as tk # these are the librabries for the priorities page of the application
 import csv # csv is imported because it saves to the csv file 
 from tkinter import messagebox, ttk
-import os
-from datetime import datetime
+import os # loads the built in modules to interact directly with the operating system
+from datetime import datetime # date time accesses dtae ad time so it gets has the ability to calculate proximity to the date
 
-PrDa = "Priority_database.csv"
+PrDa = "Priority_database.csv" # the data base where the events are being saved to
 
-def load_priorities_page(app, arrivalPage="main_menu"):
-    app.configure(bg="#6ba1c7")
+def load_priorities_page(app, arrivalPage="main_menu"): # the connection between the main menu and this page
+    app.configure(bg="#6ba1c7") # the background color of this page
 
-    home_title = tk.Frame(app, bg="#6ba1c7")
-    home_title.pack(fill="x", padx=20, pady=10)
+    home_title = tk.Frame(app, bg="#6ba1c7") # same thing creating a frame for the home button and title
+    home_title.pack(fill="x", padx=20, pady=10) # the padding
 
-    def home_back():
-        if arrivalPage == "main_menu":
+    def home_back(): # the button to go back to the main menu
+        if arrivalPage == "main_menu": # basically is saying if home is clicked go to main menu
             app.main_menu()
         else:
-            app.login_page()
+            app.login_page() # if not go to login page
 
     home_click = tk.Button(home_title, text="home", font=("Calibri", 11, "bold"),
-                           bg="#00ccd1", fg="white", command=home_back)
-    home_click.pack(side="left")
+                           bg="#00ccd1", fg="white", command=home_back) # the creation of the button and assigns the command
+    home_click.pack(side="left") # positioning
 
-    FAQTitle = tk.Label(home_title, text="Priorites", font=("Calibri", 18, "bold"), bg="#6ba1c7", fg="#00636e")
-    FAQTitle.pack(side="left", padx=20)
+    FAQTitle = tk.Label(home_title, text="Priorites", font=("Calibri", 18, "bold"), bg="#6ba1c7", fg="#00636e") # background and font color of the title
+    FAQTitle.pack(side="left", padx=20) # position and padding
 
-    main1 = tk.Frame(app, bg="#6ba1c7")
-    main1.pack(fill="both", expand=True, padx=20, pady=10)
+    main1 = tk.Frame(app, bg="#6ba1c7") # creating a frame to hold the elements
+    main1.pack(fill="both", expand=True, padx=20, pady=10) # padding for the frame
 
-    left1 = tk.Frame(main1, bg="#6ba1c7")
-    left1.pack(side="left", fill="y", padx=(0, 10))
+    left1 = tk.Frame(main1, bg="#6ba1c7") # pcreating of another frame to create the left side where the user inputs would be
+    left1.pack(side="left", fill="y", padx=(0, 10)) # padding and positioning 
 
-    right1 = tk.Frame(main1, bg="#6ba1c7")
-    right1.pack(fill="both", side="right", expand=True, padx=(10, 0))
+    right1 = tk.Frame(main1, bg="#6ba1c7") # background of this and creating the right side just like the lef side but this is the table the side with the display side
+    right1.pack(fill="both", side="right", expand=True, padx=(10, 0)) # padding and positiong
 
-    tk.Label(left1, text="task name:", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(10,2))
-    tentry= tk.Entry(left1, font=("Calibri", 11), width=22)
-    tentry.pack(fill="x", pady=(0,10))
+    tk.Label(left1, text="task name:", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(10,2)) # positiing  and padding and creation of the label fot the rask name
+    tentry= tk.Entry(left1, font=("Calibri", 11), width=22) # font of this lavel 
+    tentry.pack(fill="x", pady=(0,10)) # padding
 
-    tk.Label(left1, text="Diffculty(0-10):", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(0,2))
-    ddrop= ttk.Combobox(left1, values=[str(i) for i in range(1,11)], font=("Calibri", 11), state="readonly", width=20)
-    ddrop.pack(fill="x", pady=(0,10))
-    ddrop.set("1")
+    tk.Label(left1, text="Diffculty(0-10):", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(0,2)) # positiong and padding of this label
+    ddrop= ttk.Combobox(left1, values=[str(i) for i in range(1,11)], font=("Calibri", 11), state="readonly", width=20) # a combobox for the user to select how difficult they think a specific task is
+    ddrop.pack(fill="x", pady=(0,10)) # padding and stretch
+    ddrop.set("1") # sets the starting value to 1
 
-    tk.Label(left1, text="Due date must be in (dd/mm/yy):", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(0,2))
-    date_entry= tk.Entry(left1, font=("Calibri", 11), width=22)
-    date_entry.insert(0, "31/07/2026")
-    date_entry.pack(fill="x", pady=(0,20))
+    tk.Label(left1, text="Due date must be in (dd/mm/yy):", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(0,2)) # positiong and padding 
+    date_entry= tk.Entry(left1, font=("Calibri", 11), width=22) # creating the date entry and an entry box for it
+    date_entry.insert(0, "31/12/2026") # sets the due date to 31 december 2026
+    date_entry.pack(fill="x", pady=(0,20)) # stretch and padding
 
-    columns = ("task", "difficulty", "proximity", "priority", "raw_date")
+    columns = ("task", "difficulty", "proximity", "priority", "raw_date") # the commands for the headers 
     priorityt = ttk.Treeview(right1, columns=columns, show="headings", selectmode="browse")
 
     priorityt.column("task", width=150, anchor="w")

@@ -32,7 +32,7 @@ class App(tk.Tk):
         self.configure(bg="#00636e") # background of the login page
 
         header_frame = tk.Frame(self, bg="#00636e") # basically the top part of the login page with the faq and logo's background
-        header_frame.pack(fill="x", padx=10, pady=(5, 0)) # the layout of the top bar as it is seperate from the login pgae
+        header_frame.pack(fill="x", padx=10, pady=(5, 0)) # the layout of the top bar as it is seperate from the login pgae and its dimensions
 
         header_frame.grid_columnconfigure(0, weight=1) # basically the placeholders for the elemets so they share the same amount of the gui 
         header_frame.grid_columnconfigure(1, weight=1) # they are split evenly so they are perfect layout placheloders
@@ -53,52 +53,52 @@ class App(tk.Tk):
 
         if self.logo:
             logo_label = tk.Label(header_frame, image=self.logo, bg="#00636e") # a seperate frame for the logo and the background same as other
-            logo_label.grid(row=0, column=1, pady=5) # the positioning of this frame and size 
+            logo_label.grid(row=0, column=1, pady=5) # the padding of this frame and size 
 
         FAQ_button = tk.Button(header_frame, image=self.FAQ_icon, font=("Calibri", 10,"bold"), bg="#00ccd1", fg="white",
                                      command=self.open_FAQ_file) # the btton for the faw button in the top right and the colors and action it will do
-        FAQ_button.grid(row=0, column=2, sticky="e", pady=5) # the positionf of the botton in top right took me some time this one 
+        FAQ_button.grid(row=0, column=2, sticky="e", pady=5) # the padding of the botton in top right took me some time this one and its padding
         
         label_title = tk.Label(self, text="Time to focus?", font=("Calibri", 25, "bold"), bg="#00636e", fg="#ffffff") # the title of the window and the color that is the title in the top middle of the screen
-        label_title.pack(pady=(0, 5)) # positiong of this
+        label_title.pack(pady=(0, 5)) # padding of this adds whitespcce to top and bottom of title
         # the username title above the user entry for the username
         tk.Label(self, text="Username", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # alsong with the psotion of this label
         self.username = tk.Entry(self, font=("Calibri", 12),) # the user entry textbox so the user can enter their user name
-        self.username.pack(fill="x", padx=50, pady=(2, 5)) # the positiong of this box
+        self.username.pack(fill="x", padx=50, pady=(2, 5)) # the padding of this box
         # the password title above the password entry
-        tk.Label(self, text="Password", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # the creation of this password label and also the colors position of it
+        tk.Label(self, text="Password", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # the creation of this password label and also the colors padding of it
         self.password = tk.Entry(self, font=("Calibri", 12),) # creating the textbox of the password field
-        self.password.pack(fill="x", padx=50, pady=(2, 10)) # positioning of the password box
+        self.password.pack(fill="x", padx=50, pady=(2, 10)) # padding of the password box
         # this is for the login button and the creattion of it on the main menu page
         login_button = tk.Button(self, text="Login", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
                                 command=self.handle_login)
-        login_button.pack(fill="x", padx=50, pady=5) # the positioning of the login button on the main menu page
+        login_button.pack(fill="x", padx=50, pady=5) # the padding of the login button on the main menu page
 
         #CU_button stands for the create user button
         CU_Button = tk.Button(self, text="Create Account", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
                                 command=self.CU_page) # the creation of the create user button and also the command which is further down
-        CU_Button.pack(fill="x", padx=50, pady=5) # positioining of the create user button
+        CU_Button.pack(fill="x", padx=50, pady=5) # padding of the create user button and strecthes it
 
     def CU_page(self): # this is the page that opens when create account button is clicked
         self.clean_open() # clears the elements if something else is sitll there
         label_title = tk.Label(self, text="Create an account here!", font=("Calibri", 25, "bold"), bg="#6ba1c7", fg="#b8c5ce") # the creation of the title of the top of the page
-        label_title.pack(pady=(40,20)) # the positioning of the title for the page
+        label_title.pack(pady=(40,20)) # the padding of the title for the page
 
         tk.Label(self, text="Create an Username", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # the words beside the user entry field to enter a new userna,e
         self.username = tk.Entry(self, font=("Calibri", 12)) # the entry box next to create username: so the user can type their new username
-        self.username.pack(fill="x", padx=50, pady=(5, 15)) # positiong
+        self.username.pack(fill="x", padx=50, pady=(5, 15)) # padding
 
         tk.Label(self, text="Create a Password", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # same thing as above but for password
         self.password = tk.Entry(self, font=("Calibri", 12),) # same as above but for passoerd
-        self.password.pack(fill="x", padx=50, pady=(5, 20)) # positiong of the entry 
+        self.password.pack(fill="x", padx=50, pady=(5, 20)) # padding of the entry 
 
         register = tk.Button(self, text="Sign Up", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
                                 command=self.handle_register) # register button 
-        register.pack(fill="x", padx=50, pady=10) # positioning of the register button
+        register.pack(fill="x", padx=50, pady=10) # padding of the register button
         # cu stands for create user but i i realise now i shouldvbe called it like go back button or msthn like that
         CU_Button = tk.Button(self, text="Already got one!", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
                                 command=self.login_page) # the button to go back login page in case the user already has an account that they can use
-        CU_Button.pack(fill="x", padx=50, pady=10) # positioning of back button
+        CU_Button.pack(fill="x", padx=50, pady=10) # padding of back button
 
     def main_menu(self): # the openinig of the main menu after the login page
         self.clean_open() # clears the page
@@ -125,48 +125,48 @@ class App(tk.Tk):
         self.grid_rowconfigure(3, weight=0)
 
         top_bar = tk.Frame(self, bg="#ffffff") # the bar with the logo, welcom message settings button and faq button
-        top_bar.grid(row=0, column=0, columnspan=3, sticky="ew", padx=20, pady=10) # the positiong of this
+        top_bar.grid(row=0, column=0, columnspan=3, sticky="ew", padx=20, pady=10) # the padding of this
 
         logo_welcome = tk.Frame(top_bar, bg="#ffffff") #the logo and welcome message container so they are together
-        logo_welcome.pack(side="left", anchor="w") # positiong
+        logo_welcome.pack(side="left", anchor="w") # position
 
         if self.logo: # the logo in the top left having the same background of the main menu
             mm_logo = tk.Label(top_bar, image=self.logo, bg="#ffffff") # cretion of this mm stands for main menu
-            mm_logo.pack(side="left", padx=(0,10)) # positoning
+            mm_logo.pack(side="left", padx=(0,10)) # padding
 
         welcome_message = f"Welcome, {self.current_user if self.current_user else 'Error 2'}!" # welcome message that willbe next to the logo and will give error if something breaks
         welcome_label = tk.Label(top_bar, text=welcome_message, font=("Calibri", 14, "bold"),
                                  bg="#ffffff", fg="#00636e") # the color and text creation
-        welcome_label.pack(side="left") # positioning
+        welcome_label.pack(side="left") # the positon of this
 
         faq_sttg = tk.Frame(top_bar, bg="#ffffff") # faq and setting container
-        faq_sttg.pack(side="right", anchor="e") # position of this
+        faq_sttg.pack(side="right", anchor="e") # positioning
         settings_button = tk.Button(faq_sttg, image=self.Settings_icon, font=("Calibri", 10,"bold"), bg="#00ccd1", fg="white",
                                      command=self.open_settings_file) # creating the settings button only accesible in the main menu
-        settings_button.pack(side="right", padx=(5, 0)) # the positon og it
+        settings_button.pack(side="right", padx=(5, 0)) # the positon og it and padding
 
         FAQ_button = tk.Button(faq_sttg, image=self.FAQ_icon, font=("Calibri", 10,"bold"), bg="#00ccd1", fg="white",
                                      command=self.open_FAQ_file) # creating the faq button on the main menu
-        FAQ_button.pack(side="right", padx=(5, 0)) # the postion
+        FAQ_button.pack(side="right", padx=(5, 0)) # the padding
 
         # pbtn stands for priority button just to simplify it i made it like this this is the creation of it
         pbtn = tk.Button(self, image=self.picon, text="\nPriorities", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
                                     activebackground="#00a3a6", activeforeground="white", compound="top", command=self.priorities) # here i use activeforegoud which is wehen it is clicked it will show that color
-        pbtn.grid(row=2, column=0, sticky="nsew", padx=20,  pady=20)
+        pbtn.grid(row=2, column=0, sticky="nsew", padx=20,  pady=20) # padding
 
         #abtn stands for ATAR Calculator butotn for the same reason as above creation of it
         abtn = tk.Button(self, image=self.aicon, text="\nATAR Calculator", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
                                     activebackground="#00a3a6", activeforeground="white", compound="top", command=self.atar_calc)
-        abtn.grid(row=2, column=1, sticky="nsew", padx=20,  pady=20)
+        abtn.grid(row=2, column=1, sticky="nsew", padx=20,  pady=20) # padding
 
         # UEbtn stands for upcoming events button for a reason i think is quite well known. creation of it
         UEbtn = tk.Button(self, image=self.UEicon, text="\nUpcoming Events", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
                                     activebackground="#00a3a6", activeforeground="white", compound="top", command=self.events_p)
-        UEbtn.grid(row=2, column=2, sticky="nsew", padx=20,  pady=20)
+        UEbtn.grid(row=2, column=2, sticky="nsew", padx=20,  pady=20) # padding
         # logout button creation of it
         logout_button = tk.Button(self, text="Log out", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
                                 activebackground="#00a3a6", activeforeground="white", command=self.handle_logout)
-        logout_button.grid(row=3, column=0, sticky="nw", padx=20, pady=20)
+        logout_button.grid(row=3, column=0, sticky="nw", padx=20, pady=20) # padding
     # from here onwards it is making hte commands from the various button and various text entrys work
     def open_FAQ_file(self): # the if faq button is clicked this makes it go there
         self.clean_open() # clears anything that might be in the way
@@ -232,7 +232,7 @@ class App(tk.Tk):
         cpassword = self.password.get().strip()
         # c stands for correct
         if not cusername or not cpassword:
-            messagebox.showwarning("Error 2.75","no blanks") # once again i used 2 and 3 alr so i have to used 2.5 and 2.75
+            messagebox.showwarning("Error 2.75","no blanks") # once again i used 2 and 3 already so i have to used 2.5 and 2.75
             return
         
         with open(UDF, mode='r') as file: # this is to read the udf file and opens in read mode to check if a username is alr in use
