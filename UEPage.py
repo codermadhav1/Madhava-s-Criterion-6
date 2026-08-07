@@ -33,7 +33,7 @@ def load_UE_Page(app, arrivalPage="main_menu"):
     right1 = tk.Frame(main1, bg="#6ba1c7")
     right1.pack(fill="both", side="right", expand=True, padx=(10, 0))
 
-    tk.Label(left1, text="Name of rhe event?", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(10,2))
+    tk.Label(left1, text="Name of the event?", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(10,2))
     userUpd= tk.Entry(left1, font=("Calibri", 11), width=22)
     userUpd.pack(fill="x", pady=(0,10))
 

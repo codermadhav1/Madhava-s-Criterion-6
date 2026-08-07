@@ -194,15 +194,15 @@ def load_atar_page(app, arrivalPage="main_menu"): # the connection between the m
         final_atar = aggregate_to_atar(total_aggregate) # converts the aggreagate to atar to display it in the next message
         result_label.config(text=f"Aggregate: {total_aggregate:.2f} , Estimated ATAR: {final_atar:.2f}") # the message that will show with the calculated aggregate and the estimated atar
 
-    formf = tk.Frame(app, bg="#6ba1c7") # the formf stands for form fill with the 2 inputs required from the user
-    formf.pack(fill="both", expand=True, padx=40, pady=10)
+    formf = tk.Frame(app, bg="#6ba1c7") # the formf stands for form fill with the 2 inputs labels required from the user and the frame created for it
+    formf.pack(fill="both", expand=True, padx=40, pady=10) # the padding and of the frame and also will stretch accordingly if requred
 
-    tk.Label(formf, text="select subject", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=0, sticky="w", pady=5)
-    tk.Label(formf, text="enter raw score (integer)", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=1, sticky="w", padx=20, pady=5)
-    tk.Label(formf, text="scaled result", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=2, sticky="w", pady=5)
+    tk.Label(formf, text="select subject", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=0, sticky="w", pady=5) # the label for which subject to choose and also the positioning and padding
+    tk.Label(formf, text="enter raw score (integer)", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=1, sticky="w", padx=20, pady=5) # the label for the entry of the intended raw socre and its positiong and padding
+    tk.Label(formf, text="scaled result", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=2, sticky="w", pady=5) # the label with the title of scaled result which is the raw score plus the scaling
 
-    subject_options = ["Mathematical Methods", "Chemistry", "English", "Physics", "Biology", "Software Dev", "Buisness Management", "Physical Education", "General Maths"]
-    subject_rows = []
+    subject_options = ["Mathematical Methods", "Chemistry", "English", "Physics", "Biology", "Software Dev", "Buisness Management", "Physical Education", "General Maths"] # the subjects to choose from i couldnt add more because it is a long and boring thing to do so i kept it to the main ones
+    subject_rows = [] # assings it as a empty list
 
     for i in range(6):
         subjectchoose = tk.StringVar()

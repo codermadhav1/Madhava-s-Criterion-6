@@ -51,7 +51,7 @@ def load_priorities_page(app, arrivalPage="main_menu"): # the connection between
     columns = ("task", "difficulty", "proximity", "priority", "raw_date") # the commands for the headers in the table
     priorityt = ttk.Treeview(right1, columns=columns, show="headings", selectmode="browse") # creating the table to display the 5 headrs above
 
-    priorityt.column("task", width=150, anchor="w") # the width of the task header and the position + title
+    priorityt.column("task", width=100, anchor="w") # the width of the task header and the position + title
     priorityt.column("difficulty", width=100, anchor="center") #  the width of the task header and the position + title
     priorityt.column("proximity", width=100, anchor="center") # the width of the task header and the position + title
     priorityt.column("priority", width=100, anchor="center") # the width of the task header and the position + title
