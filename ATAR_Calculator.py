@@ -204,23 +204,23 @@ def load_atar_page(app, arrivalPage="main_menu"): # the connection between the m
     subject_options = ["Mathematical Methods", "Chemistry", "English", "Physics", "Biology", "Software Dev", "Buisness Management", "Physical Education", "General Maths"] # the subjects to choose from i couldnt add more because it is a long and boring thing to do so i kept it to the main ones
     subject_rows = [] # assings it as a empty list
 
-    for i in range(6):
-        subjectchoose = tk.StringVar()
-        subdrop = ttk.Combobox(formf, textvariable=subjectchoose, values= subject_options, state="readonly", width=25)
-        subdrop.grid(row=i+1, column=0, pady=6, sticky="w")
-        subdrop.current(i if i < len(subject_options) else 0)
+    for i in range(6): # creating a loop that executues the code 6 times in this case the subjects to see which ones have been used
+        subjectchoose = tk.StringVar() # the selected subject is assigned to a string variable so it can be used in the calculations
+        subdrop = ttk.Combobox(formf, textvariable=subjectchoose, values= subject_options, state="readonly", width=25) # the combobox with the subject options to choose from
+        subdrop.grid(row=i+1, column=0, pady=6, sticky="w") # the paddng and positions
+        subdrop.current(i if i < len(subject_options) else 0) # used to prevent errors if i goes out of bounds so more than the subject choices that is currently 9
 
-        score_ent = tk.Entry(formf, font=("Calibri", 11, "bold"), width=10)
-        score_ent.grid(row=i+1, column=1, padx=20, pady=6, sticky="w")
-        score_ent.insert(0, "30")
+        score_ent = tk.Entry(formf, font=("Calibri", 11, "bold"), width=10) # the entry box for the raw scire
+        score_ent.grid(row=i+1, column=1, padx=20, pady=6, sticky="w") # the posiitong and padding of the entry box 
+        score_ent.insert(0, "30") # sets the scores to the starting average default value of 30
 
-        scaledlbl = tk.Label(formf, font=("Calibri", 11, "bold"), bg="#6ba1c7", fg= "#00ccd1")
-        scaledlbl.grid(row=i+1, column=2, sticky="w")
+        scaledlbl = tk.Label(formf, font=("Calibri", 11, "bold"), bg="#6ba1c7", fg= "#00ccd1") # the message with the scaled score and the background and font color of it
+        scaledlbl.grid(row=i+1, column=2, sticky="w") # the positing
 
-        subject_rows.append((subjectchoose, score_ent, scaledlbl))
+        subject_rows.append((subjectchoose, score_ent, scaledlbl)) # adds the subject chosen and the score entry and the scaled label to the list so it can be used in the calculations
 
-    calcbtn = tk.Button(formf, text="calculate ATAR", font=("Calibri", 12, "bold"), bg="#00636e", fg="white", padx=15, pady=5, command=calculate_atar)
-    calcbtn.grid(row=7, column=0, columnspan=3, pady=20)
+    calcbtn = tk.Button(formf, text="calculate ATAR", font=("Calibri", 12, "bold"), bg="#00636e", fg="white", padx=15, pady=5, command=calculate_atar) # creating the button that scales the raw score and sums it all to calculate the atar
+    calcbtn.grid(row=7, column=0, columnspan=3, pady=20) # the positong and padding
 
-    result_label = tk.Label(formf, text="enter scores and click calculate", font=("Calibri", 14, "bold"), bg="#6ba1c7", fg="#00636e")
-    result_label.grid(row=8, column=0, columnspan=3, pady=5)    
+    result_label = tk.Label(formf, text="enter scores and click calculate", font=("Calibri", 14, "bold"), bg="#6ba1c7", fg="#00636e") # the message at the bottom of the screen to indicate to users what to do
+    result_label.grid(row=8, column=0, columnspan=3, pady=5) # positiong and padding 
