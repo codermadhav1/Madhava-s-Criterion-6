@@ -67,7 +67,7 @@ class App(tk.Tk):
         self.username.pack(fill="x", padx=50, pady=(2, 5)) # the padding of this box
         # the password title above the password entry
         tk.Label(self, text="Password", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # the creation of this password label and also the colors padding of it
-        self.password = tk.Entry(self, font=("Calibri", 12),) # creating the textbox of the password field
+        self.password = tk.Entry(self, font=("Calibri", 12), show="*") # creating the textbox of the password field added hashing which a fellow peer showed me how to make it hashed
         self.password.pack(fill="x", padx=50, pady=(2, 10)) # padding of the password box
         # this is for the login button and the creattion of it on the main menu page
         login_button = tk.Button(self, text="Login", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
