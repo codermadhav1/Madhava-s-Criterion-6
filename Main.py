@@ -4,15 +4,15 @@ import csv
 import tkinter as tk
 from tkinter import messagebox
 # UDF stands for user database file for the passwords and usernames of this application
-UDF = "users.csv"
+user_data_file = "users.csv"
 # basically means if the file or folder doesn not exists it will create the file with the username and password columns in the csv file
-if not os.path.exists(UDF):
-    with open(UDF, 'w', newline='') as file:
+if not os.path.exists(user_data_file):
+    with open(user_data_file, 'w', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(["username", "password"])
 # this is the calss that opens the login page & main menu and all the application that can be accessed through the main menu
 class App(tk.Tk):
-    def __init__(self): # 
+    def __init__(self): 
         super().__init__()
         self.title("Priority app") # The titel of the window that will appear in the top left along with the os
         self.geometry("500x450") # the size of the login page window and the creation of ascount
@@ -74,12 +74,11 @@ class App(tk.Tk):
                                 command=self.handle_login)
         login_button.pack(fill="x", padx=50, pady=5) # the padding of the login button on the main menu page
 
-        #CU_button stands for the create user button
-        CU_Button = tk.Button(self, text="Create Account", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
+        back_button = tk.Button(self, text="Create Account", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
                                 command=self.CU_page) # the creation of the create user button and also the command which is further down
-        CU_Button.pack(fill="x", padx=50, pady=5) # padding of the create user button and strecthes it
+        back_button.pack(fill="x", padx=50, pady=5) # padding of the create user button and strecthes it
 
-    def CU_page(self): # this is the page that opens when create account button is clicked
+    def CU_page(self): # this is the page that opens when create account button is clicked cu stands for create username
         self.clean_open() # clears the elements if something else is sitll there
         label_title = tk.Label(self, text="Create an account here!", font=("Calibri", 25, "bold"), bg="#6ba1c7", fg="#b8c5ce") # the creation of the title of the top of the page
         label_title.pack(pady=(40,20)) # the padding of the title for the page
@@ -95,10 +94,10 @@ class App(tk.Tk):
         register = tk.Button(self, text="Sign Up", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
                                 command=self.handle_register) # register button 
         register.pack(fill="x", padx=50, pady=10) # padding of the register button
-        # cu stands for create user but i i realise now i shouldvbe called it like go back button or msthn like that
-        CU_Button = tk.Button(self, text="Already got one!", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
+        
+        back_button = tk.Button(self, text="Already got one!", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
                                 command=self.login_page) # the button to go back login page in case the user already has an account that they can use
-        CU_Button.pack(fill="x", padx=50, pady=10) # padding of back button
+        back_button.pack(fill="x", padx=50, pady=10) # padding of back button
 
     def main_menu(self): # the openinig of the main menu after the login page
         self.clean_open() # clears the page
@@ -149,20 +148,20 @@ class App(tk.Tk):
                                      command=self.open_FAQ_file) # creating the faq button on the main menu
         FAQ_button.pack(side="right", padx=(5, 0)) # the padding
 
-        # pbtn stands for priority button just to simplify it i made it like this this is the creation of it
-        pbtn = tk.Button(self, image=self.picon, text="\nPriorities", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
+        # creating a button for all three features of the app so the user can use them
+        priority_btn = tk.Button(self, image=self.picon, text="\nPriorities", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
                                     activebackground="#00a3a6", activeforeground="white", compound="top", command=self.priorities) # here i use activeforegoud which is wehen it is clicked it will show that color
-        pbtn.grid(row=2, column=0, sticky="nsew", padx=20,  pady=20) # padding
+        priority_btn.grid(row=2, column=0, sticky="nsew", padx=20,  pady=20) # padding
 
-        #abtn stands for ATAR Calculator butotn for the same reason as above creation of it
-        abtn = tk.Button(self, image=self.aicon, text="\nATAR Calculator", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
+        
+        atar_btn = tk.Button(self, image=self.aicon, text="\nATAR Calculator", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
                                     activebackground="#00a3a6", activeforeground="white", compound="top", command=self.atar_calc)
-        abtn.grid(row=2, column=1, sticky="nsew", padx=20,  pady=20) # padding
+        atar_btn.grid(row=2, column=1, sticky="nsew", padx=20,  pady=20) # padding
 
-        # UEbtn stands for upcoming events button for a reason i think is quite well known. creation of it
-        UEbtn = tk.Button(self, image=self.UEicon, text="\nUpcoming Events", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
-                                    activebackground="#00a3a6", activeforeground="white", compound="top", command=self.events_p)
-        UEbtn.grid(row=2, column=2, sticky="nsew", padx=20,  pady=20) # padding
+        
+        upcoming_events_btn = tk.Button(self, image=self.UEicon, text="\nUpcoming Events", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
+                                    activebackground="#00a3a6", activeforeground="white", compound="top", command=self.events_page)
+        upcoming_events_btn.grid(row=2, column=2, sticky="nsew", padx=20,  pady=20) # padding
         # logout button creation of it
         logout_button = tk.Button(self, text="Log out", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
                                 activebackground="#00a3a6", activeforeground="white", command=self.handle_logout)
@@ -172,8 +171,8 @@ class App(tk.Tk):
         self.clean_open() # clears anything that might be in the way
         import FAQPage # opens the faq page python file
 
-        arrivalPage = "main_menu" if self.current_user else "login" # this is so it is accessibile from the login page if user is not signed in or accesible from manin menu if logged in
-        FAQPage.load_FAQ_page(self, arrivalPage) # i make sure this is the case because before if faq page was in it could bypass login
+        arrival_page = "main_menu" if self.current_user else "login" # this is so it is accessibile from the login page if user is not signed in or accesible from manin menu if logged in
+        FAQPage.load_FAQ_page(self, arrival_page) # i make sure this is the case because before if faq page was in it could bypass login
 
     def open_settings_file(self): # this is command creation of what to do once the button is clicked in the main menu
         self.clean_open() # clears the memory and any wifget for speed which is a non functional requirement
@@ -197,7 +196,7 @@ class App(tk.Tk):
         ATAR_Calculator.load_atar_page(self)
 
 
-    def events_p(self): # same aas last two but fro upcoming events
+    def events_page(self): # same aas last two but fro upcoming events
         self.clean_open()
 
         import UEPage
@@ -205,46 +204,46 @@ class App(tk.Tk):
         UEPage.load_UE_Page(self)
 
     def handle_login(self):
-        # the c stands for correct
-        cusername = self.username.get().strip()
-        cpassword = self.password.get().strip()
+        
+        correct_username = self.username.get().strip()
+        correct_password = self.password.get().strip()
         # input validation for the login
-        if not cusername or not cpassword:
+        if not correct_username or not correct_password:
             messagebox.showwarning("error 2", "wrong user or password or you have to enter everything") # error message 
         
         valid_user = False # i set it to false so if it is empty it wont let them through unless it is in the udf.csv file
-        with open(UDF, mode='r') as file: # checks the file
+        with open(user_data_file, mode='r') as file: # checks the file
             reader = csv.DictReader(file)
             for row in reader:
-                if row ['username'] == cusername and row['password'] == cpassword:
+                if row ['username'] == correct_username and row['password'] == correct_password:
                     valid_user = True # if the username and password match those in that csv file it will allow the user through
                     break
 
         if valid_user:
-            self.current_user = cusername # this is so it saves it as the change username as well and also the welcome message is addressed to this name
+            self.current_user = correct_username # this is so it saves it as the change username as well and also the welcome message is addressed to this name
             self.main_menu() # calling the main menu
         else:
             messagebox.showerror("something is wrong (error 2.5)", "Invalid username or password fix it to enter.") # i had to use 2.5 because i used 2 and 3 already before fixing it
             return
     
     def handle_register(self): # for the register page it changes the correct user name and password when the user updates their credentials
-        cusername = self.username.get().strip()
-        cpassword = self.password.get().strip()
+        correct_username = self.username.get().strip()
+        correct_password = self.password.get().strip()
         # c stands for correct
-        if not cusername or not cpassword:
+        if not correct_username or not correct_password:
             messagebox.showwarning("Error 2.75","no blanks") # once again i used 2 and 3 already so i have to used 2.5 and 2.75
             return
         
-        with open(UDF, mode='r') as file: # this is to read the udf file and opens in read mode to check if a username is alr in use
+        with open(user_data_file, mode='r') as file: # this is to read the udf file and opens in read mode to check if a username is alr in use
             reader = csv.DictReader(file)
             for row in reader:
-                if row['username'] == cusername:
+                if row['username'] == correct_username:
                     messagebox.showerror("invalid", "username already in use") # error message to tell user they cant have the same username as someone else
                     return
                 
-        with open(UDF, mode='a', newline='') as file: # same as above but this time for the successful account creation and saves it there
+        with open(user_data_file, mode='a', newline='') as file: # same as above but this time for the successful account creation and saves it there
             writer = csv.writer(file) # creates a writer object that formats and writes into a csv file
-            writer.writerow([cusername, cpassword]) # puts its according as either the correct username or password
+            writer.writerow([correct_username, correct_password]) # puts its according as either the correct username or password
 
         messagebox.showinfo("success", "account created") # success message once the accound is created
         self.login_page() # calls the login page once account is created
