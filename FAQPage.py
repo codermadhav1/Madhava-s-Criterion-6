@@ -13,7 +13,7 @@ def load_FAQ_page(app, arrival_page="main_menu"): # this is the configuration of
         else:
             app.login_page()
 
-    home_click = tk.Button(home_title, text="home", font=("Calibri", 11, "bold"),
+    home_click = tk.Button(home_title, text="Home", font=("Calibri", 11, "bold"),
                            bg="#00ccd1", fg="white", command=home_back) # creating the back home button
     home_click.pack(side="left") # position of this button
 
@@ -23,10 +23,10 @@ def load_FAQ_page(app, arrival_page="main_menu"): # this is the configuration of
     contents = tk.Frame(app, bg="#6ba1c7") # creating a frame to hold all the question and answers in the faq page
     contents.pack(fill="both", expand=True, padx=20, pady=20) # positioning
     # question1 all questions and answers follow the same layout
-    question_1 = tk.Label(contents, text="Q1. How do i report an error or request for help or give feedback/comment?", font=("Calibri", 12, 'bold'), bg="#ffffff", fg="#000000")
+    question_1 = tk.Label(contents, text="Q1. How do I report an error or give feedback/comments?", font=("Calibri", 12, 'bold'), bg="#ffffff", fg="#000000")
     question_1.pack(anchor="w", pady=(10,2)) # padding
     # answer 1
-    answer_1 = tk.Label(contents, text="A1. Click here", font=("Calibri", 12, "underline"), bg="#ffffff", fg="#0000ee")
+    answer_1 = tk.Label(contents, text="A1. Click here!", font=("Calibri", 12, "underline"), bg="#ffffff", fg="#0000ee")
     answer_1.pack(anchor="w", pady=(10,2))
     # this is where webrbwoser library was used in order to do this i had to search up how to use this because i couldnt us a link in tkinter
     def open_link(event):
@@ -37,17 +37,17 @@ def load_FAQ_page(app, arrival_page="main_menu"): # this is the configuration of
     question_2 = tk.Label(contents, text="Q2. What is the main purpose?", font=("Calibri", 12, 'bold'), bg="#ffffff", fg="#000000")
     question_2.pack(anchor="w", pady=(10,2))
     # answer 2
-    answer_2 = tk.Label(contents, text="A2. To calculate priorties and ATAR and view upcoming events", font=("Calibri", 12,), bg="#ffffff", fg="#000000")
+    answer_2 = tk.Label(contents, text="A2. To calculate priorties and ATAR and view upcoming events.", font=("Calibri", 12,), bg="#ffffff", fg="#000000")
     answer_2.pack(anchor="w", pady=(10,2))
     # question 3
     question_3 = tk.Label(contents, text="Q3. I have forgotten my username or password?", font=("Calibri", 12, 'bold'), bg="#ffffff", fg="#000000")
     question_3.pack(anchor="w", pady=(10,2))
     # answer 3
-    answer_3 = tk.Label(contents, text="A3. Use the link above - madhava will guide you", font=("Calibri", 12,), bg="#ffffff", fg="#000000")
+    answer_3 = tk.Label(contents, text="A3. Use the link above - Madhava will guide you.", font=("Calibri", 12,), bg="#ffffff", fg="#000000")
     answer_3.pack(anchor="w", pady=(10,2))
     # question 4
-    question_4 = tk.Label(contents, text="Q4. I don't like my username or password i want to change it ", font=("Calibri", 12, 'bold'), bg="#ffffff", fg="#000000")
+    question_4 = tk.Label(contents, text="Q4. How do I change my username or password? ", font=("Calibri", 12, 'bold'), bg="#ffffff", fg="#000000")
     question_4.pack(anchor="w", pady=(10,2))
     # answer 4
-    answer_4 = tk.Label(contents, text="A4. Go to settings", font=("Calibri", 12,), bg="#ffffff", fg="#000000")
+    answer_4 = tk.Label(contents, text="A4. Go to settings.", font=("Calibri", 12,), bg="#ffffff", fg="#000000")
     answer_4.pack(anchor="w", pady=(10,2))

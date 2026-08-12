@@ -16,7 +16,7 @@ def load_settings_page(app, arrival_page="main_menu"):
         else:
             app.login_page()
 
-    home_click = tk.Button(home_title, text="home", font=("Calibri", 11, "bold"),
+    home_click = tk.Button(home_title, text="Home", font=("Calibri", 11, "bold"),
                            bg="#00ccd1", fg="white", command=home_back) # same as faqpage
     home_click.pack(side="left") # the position of this
 

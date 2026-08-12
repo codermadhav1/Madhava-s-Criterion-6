@@ -59,14 +59,14 @@ class App(tk.Tk):
                                      command=self.open_FAQ_file) # the btton for the faw button in the top right and the colors and action it will do
         FAQ_button.grid(row=0, column=2, sticky="e", pady=5) # the padding of the botton in top right took me some time this one and its padding
         
-        label_title = tk.Label(self, text="Time to focus?", font=("Calibri", 25, "bold"), bg="#00636e", fg="#ffffff") # the title of the window and the color that is the title in the top middle of the screen
+        label_title = tk.Label(self, text="Time To Focus?", font=("Calibri", 25, "bold"), bg="#00636e", fg="#ffffff") # the title of the window and the color that is the title in the top middle of the screen
         label_title.pack(pady=(0, 5)) # padding of this adds whitespcce to top and bottom of title
         # the username title above the user entry for the username
-        tk.Label(self, text="Username", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # alsong with the psotion of this label
+        tk.Label(self, text="Username:", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # alsong with the psotion of this label
         self.username = tk.Entry(self, font=("Calibri", 12),) # the user entry textbox so the user can enter their user name
         self.username.pack(fill="x", padx=50, pady=(2, 5)) # the padding of this box
         # the password title above the password entry
-        tk.Label(self, text="Password", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # the creation of this password label and also the colors padding of it
+        tk.Label(self, text="Password:", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # the creation of this password label and also the colors padding of it
         self.password = tk.Entry(self, font=("Calibri", 12), show="*") # creating the textbox of the password field added hashing which a fellow peer showed me how to make it hashed
         self.password.pack(fill="x", padx=50, pady=(2, 10)) # padding of the password box
         # this is for the login button and the creattion of it on the main menu page
@@ -80,22 +80,22 @@ class App(tk.Tk):
 
     def CU_page(self): # this is the page that opens when create account button is clicked cu stands for create username
         self.clean_open() # clears the elements if something else is sitll there
-        label_title = tk.Label(self, text="Create an account here!", font=("Calibri", 25, "bold"), bg="#6ba1c7", fg="#b8c5ce") # the creation of the title of the top of the page
+        label_title = tk.Label(self, text="Create An Account Here!", font=("Calibri", 25, "bold"), bg="#6ba1c7", fg="#b8c5ce") # the creation of the title of the top of the page
         label_title.pack(pady=(40,20)) # the padding of the title for the page
 
-        tk.Label(self, text="Create an Username", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # the words beside the user entry field to enter a new userna,e
+        tk.Label(self, text="Create an Username:", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # the words beside the user entry field to enter a new userna,e
         self.username = tk.Entry(self, font=("Calibri", 12)) # the entry box next to create username: so the user can type their new username
         self.username.pack(fill="x", padx=50, pady=(5, 15)) # padding
 
-        tk.Label(self, text="Create a Password", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # same thing as above but for password
+        tk.Label(self, text="Create a Password:", font=("Calibri", 10), bg="#ffffff", fg="#000000").pack(anchor="w", padx=50) # same thing as above but for password
         self.password = tk.Entry(self, font=("Calibri", 12),) # same as above but for passoerd
         self.password.pack(fill="x", padx=50, pady=(5, 20)) # padding of the entry 
 
-        register = tk.Button(self, text="Sign Up", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
+        register = tk.Button(self, text="Sign Up!", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
                                 command=self.handle_register) # register button 
         register.pack(fill="x", padx=50, pady=10) # padding of the register button
         
-        back_button = tk.Button(self, text="Already got one!", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
+        back_button = tk.Button(self, text="Already Got One!", font=("Calibri", 12, "bold"), bg="#00ccd1", fg="white",
                                 command=self.login_page) # the button to go back login page in case the user already has an account that they can use
         back_button.pack(fill="x", padx=50, pady=10) # padding of back button
 

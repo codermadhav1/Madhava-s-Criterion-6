@@ -18,7 +18,7 @@ def load_priorities_page(app, arrival_page="main_menu"): # the connection betwee
         else:
             app.login_page() # if not go to login page
 
-    home_click = tk.Button(home_title, text="home", font=("Calibri", 11, "bold"),
+    home_click = tk.Button(home_title, text="Home", font=("Calibri", 11, "bold"),
                            bg="#00ccd1", fg="white", command=home_back) # the creation of the button and assigns the command
     home_click.pack(side="left") # positioning
 
@@ -34,16 +34,16 @@ def load_priorities_page(app, arrival_page="main_menu"): # the connection betwee
     right_frame = tk.Frame(main_frame, bg="#6ba1c7") # background of this and creating the right side just like the lef side but this is the table the side with the display side
     right_frame.pack(fill="both", side="right", expand=True, padx=(10, 0)) # padding and positiong
 
-    tk.Label(left_frame, text="task name:", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(10,2)) # positiing  and padding and creation of the label fot the rask name
+    tk.Label(left_frame, text="Task Name:", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(10,2)) # positiing  and padding and creation of the label fot the rask name
     task_entry= tk.Entry(left_frame, font=("Calibri", 11), width=22) # font of this lavel 
     task_entry.pack(fill="x", pady=(0,10)) # padding
 
-    tk.Label(left_frame, text="Diffculty(0-10):", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(0,2)) # positiong and padding of this label
+    tk.Label(left_frame, text="Difficulty (0-10):", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(0,2)) # positiong and padding of this label
     difficulty_dropbox= ttk.Combobox(left_frame, values=[str(i) for i in range(1,11)], font=("Calibri", 11), state="readonly", width=20) # a combobox for the user to select how difficult they think a specific task is
     difficulty_dropbox.pack(fill="x", pady=(0,10)) # padding and stretch
     difficulty_dropbox.set("1") # sets the starting value to 1
 
-    tk.Label(left_frame, text="Due date must be in (dd/mm/yy):", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(0,2)) # positiong and padding 
+    tk.Label(left_frame, text="Due Date (DD/MM/YYYY):", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(0,2)) # positiong and padding 
     date_entry= tk.Entry(left_frame, font=("Calibri", 11), width=22) # creating the date entry and an entry box for it
     date_entry.insert(0, "31/12/2026") # sets the due date to 31 december 2026
     date_entry.pack(fill="x", pady=(0,20)) # stretch and padding
@@ -68,7 +68,7 @@ def load_priorities_page(app, arrival_page="main_menu"): # the connection betwee
         for index, (value, k) in enumerate(data_list): # a loop through a collection whilst tracking the index number
             priority_table.move(k, "", index) #to move the elements in relation to their value & index
         priority_table.heading(col, command=lambda: sort_by(col, not reverse)) # doing the same but the opposite of above which is the opposite of reverse
-    for col, title in [("task", "Task name"), ("difficulty", "Difficulty score"), ("proximity", "Proximity (days)"), ("priority", "Priority score")]: # title of each of the colimmsn
+    for col, title in [("task", "Task Name"), ("difficulty", "Difficulty Score"), ("proximity", "Days Remaining"), ("priority", "Priority Score")]: # title of each of the colimmsn
         priority_table.heading(col, text=f"{title}", command=lambda c=col: sort_by(c, False)) # for each of them it will sort by column and title
     
     def score_calculations(date_string, difficulty_score): #priority score calculations
@@ -120,11 +120,11 @@ def load_priorities_page(app, arrival_page="main_menu"): # the connection betwee
     def add_priority(): # adding a priority function
         task_title, difficulty_title, date_title = task_entry.get().strip(), difficulty_dropbox.get(), date_entry.get().strip() # makes these all to unpack the tuples, and clean errors
         if not task_title or score_calculations(date_title, difficulty_title)[1] is None: # error message creation
-            messagebox.showerror("Error 8", "you have got to check inputs. also you can onl yuse dd/mm/yy") # the error message 
+            messagebox.showerror("Error 8", "you have got to check inputs. also you can only use dd/mm/yy") # the error message 
             return
         save_rows(csv_rows() + [[task_title, difficulty_title, date_title]]) # saves the changes
     
-    def modifyPriority(is_delete=False): # the function to modify an already created priority
+    def modify_priority(is_delete=False): # the function to modify an already created priority
         selected = priority_table.selection() # the selected priority to adjust in the table must be selectred in order for it to work
         if not selected: # an error message if none of the created priorites are not selectred
             messagebox.showerror("Error 9", "select one of the tasks to change") # error message
@@ -172,8 +172,8 @@ def load_priorities_page(app, arrival_page="main_menu"): # the connection betwee
     
     priority_table.bind("<<TreeviewSelect>>", onrow) # this is the binding of the table to the onrow function so when a row is selected it will call the onrow function
 
-    tk.Button(left_frame, text="Add priority", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=add_priority).pack(fill="x",pady=2) # creates the buttons for add, modify and delte priorities and their respective padding and commands
-    tk.Button(left_frame, text="Modify priority(make sure to select)", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=lambda: modifyPriority(is_delete=False)).pack(fill="x",pady=2)
-    tk.Button(left_frame, text="Delete priority(make sure to select)", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=lambda: modifyPriority(is_delete=True)).pack(fill="x",pady=2)
+    tk.Button(left_frame, text="Add Priority", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=add_priority).pack(fill="x",pady=2) # creates the buttons for add, modify and delte priorities and their respective padding and commands
+    tk.Button(left_frame, text="Modify Priority (Make Sure To Select!)", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=lambda: modify_priority(is_delete=False)).pack(fill="x",pady=2)
+    tk.Button(left_frame, text="Delete Priority (Make Sure To Select!)", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=lambda: modify_priority(is_delete=True)).pack(fill="x",pady=2)
 
     read_rows() # calls read rows from the csv file to show it once the user opens the feature with great efficiency

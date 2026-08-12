@@ -13,7 +13,7 @@ def load_atar_page(app, arrival_page="main_menu"): # the connection between the 
         else:
             app.login_page() # if not go to login page
 
-    home_click = tk.Button(home_title, text="home", font=("Calibri", 11, "bold"),
+    home_click = tk.Button(home_title, text="Home", font=("Calibri", 11, "bold"),
                            bg="#00ccd1", fg="white", command=home_back) # the creation of the button and assigns the command
     home_click.pack(side="left") # positioning
 
@@ -197,9 +197,9 @@ def load_atar_page(app, arrival_page="main_menu"): # the connection between the 
     form_frame = tk.Frame(app, bg="#6ba1c7") # the form_frame stands for form frame with the 2 inputs labels required from the user and the frame created for it
     form_frame.pack(fill="both", expand=True, padx=40, pady=10) # the padding and of the frame and also will stretch accordingly if requred
 
-    tk.Label(form_frame, text="select subject", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=0, sticky="w", pady=5) # the label for which subject to choose and also the positioning and padding
-    tk.Label(form_frame, text="enter raw score (integer)", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=1, sticky="w", padx=20, pady=5) # the label for the entry of the intended raw socre and its positiong and padding
-    tk.Label(form_frame, text="scaled result", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=2, sticky="w", pady=5) # the label with the title of scaled result which is the raw score plus the scaling
+    tk.Label(form_frame, text="Select Subject", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=0, sticky="w", pady=5) # the label for which subject to choose and also the positioning and padding
+    tk.Label(form_frame, text="Enter Raw Score", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=1, sticky="w", padx=20, pady=5) # the label for the entry of the intended raw socre and its positiong and padding
+    tk.Label(form_frame, text="Scaled Result", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=2, sticky="w", pady=5) # the label with the title of scaled result which is the raw score plus the scaling
 
     subject_options = ["Mathematical Methods", "Chemistry", "English", "Physics", "Biology", "Software Dev", "Buisness Management", "Physical Education", "General Maths"] # the subjects to choose from i couldnt add more because it is a long and boring thing to do so i kept it to the main ones
     subject_rows = [] # assings it as a empty list
@@ -219,8 +219,8 @@ def load_atar_page(app, arrival_page="main_menu"): # the connection between the 
 
         subject_rows.append((choose_subject, score_entry, scaled_label)) # adds the subject chosen and the score entry and the scaled label to the list so it can be used in the calculations
 
-    calculate_button = tk.Button(form_frame, text="calculate ATAR", font=("Calibri", 12, "bold"), bg="#00636e", fg="white", padx=15, pady=5, command=calculate_atar) # creating the button that scales the raw score and sums it all to calculate the atar
+    calculate_button = tk.Button(form_frame, text="Calculate ATAR", font=("Calibri", 12, "bold"), bg="#00636e", fg="white", padx=15, pady=5, command=calculate_atar) # creating the button that scales the raw score and sums it all to calculate the atar
     calculate_button.grid(row=7, column=0, columnspan=3, pady=20) # the positong and padding
 
-    result_label = tk.Label(form_frame, text="enter scores and click calculate", font=("Calibri", 14, "bold"), bg="#6ba1c7", fg="#00636e") # the message at the bottom of the screen to indicate to users what to do
+    result_label = tk.Label(form_frame, text="Enter Scores And Click Calculate!", font=("Calibri", 14, "bold"), bg="#6ba1c7", fg="#00636e") # the message at the bottom of the screen to indicate to users what to do
     result_label.grid(row=8, column=0, columnspan=3, pady=5) # positiong and padding 

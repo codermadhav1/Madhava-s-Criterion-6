@@ -17,7 +17,7 @@ def load_UE_Page(app, arrival_page="main_menu"): # the connections between the m
         else:
             app.login_page() # if not go to login page
 
-    home_click = tk.Button(home_title, text="home", font=("Calibri", 11, "bold"),
+    home_click = tk.Button(home_title, text="Home", font=("Calibri", 11, "bold"),
                            bg="#00ccd1", fg="white", command=home_back) # the creation of the button and assigns the command
     home_click.pack(side="left") # positioning
 
@@ -33,18 +33,18 @@ def load_UE_Page(app, arrival_page="main_menu"): # the connections between the m
     right_frame = tk.Frame(main_frame, bg="#6ba1c7") # background of this and creating the right side just like the lef side but this is the table the side with the display side
     right_frame.pack(fill="both", side="right", expand=True, padx=(10, 0)) # padding and positiong
     # the labels are also positioned in a similar way to the prioties functon as upcoming events is basically a watered down version of the prirotiy feature
-    tk.Label(left_frame, text="Name of the event?", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(10,2)) # positiong and padding of this label
+    tk.Label(left_frame, text="Event Name:", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(10,2)) # positiong and padding of this label
     user_update= tk.Entry(left_frame, font=("Calibri", 11), width=22) # an entry box for the user to input the name of the events
     user_update.pack(fill="x", pady=(0,10)) #  padding of this entry box
 
-    tk.Label(left_frame, text="Date of the event?", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(0,2)) # positiong and padding of this label
+    tk.Label(left_frame, text="Event Date:", font=("Calibri", 11, "bold"), bg="#6ba1c7", fg="#00636e").pack(anchor="w", pady=(0,2)) # positiong and padding of this label
     date_update= tk.Entry(left_frame, font=("Calibri", 11), width=22) # the entry box for the date entry for this box
     date_update.pack(fill="x", pady=(0,20)) # padding of this entry box
 
     columns = ("title", "date") # the columns in the csv and the table that is required for the upcomoing events feature
     table_UE = ttk.Treeview(right_frame, columns=columns, show="headings") # the table that is present wth all the upcoming events
-    table_UE.heading("title", text="Event name") # the title of one of the columns in the table on the upcoming events tab;e
-    table_UE.heading("date", text="Event date") # the title of the other column in the table
+    table_UE.heading("title", text="Event Name") # the title of one of the columns in the table on the upcoming events tab;e
+    table_UE.heading("date", text="Event Date") # the title of the other column in the table
     table_UE.column("title", width=220, anchor="w") # the width and the psoitiong of the title for the event name
     table_UE.column("date", width=120, anchor="center") # same as the one above but for the event date
     table_UE.pack(fill="both", expand=True) # the table will expand if the screen dimensions are changed
@@ -109,7 +109,7 @@ def load_UE_Page(app, arrival_page="main_menu"): # the connections between the m
         date_update.delete(0, tk.END) # clear the entry field for date
         table_UE.selection_remove(table_UE.selection()) # clears the selection from the table
     
-    tk.Button(left_frame, text="Add event", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=add_event).pack(fill="x", pady=2) # creates the button to create an event and its padding
-    tk.Button(left_frame, text="Adjust event (make sure it selected)", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=update_event).pack(fill="x", pady=2) # creates the button to adjust an event and its padding
-    tk.Button(left_frame, text="Delete event (make sure it selected)", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=delete_event).pack(fill="x", pady=2) # creates the button to delete an event and its padding
+    tk.Button(left_frame, text="Add Event", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=add_event).pack(fill="x", pady=2) # creates the button to create an event and its padding
+    tk.Button(left_frame, text="Adjust Event (Make Sure To Select!)", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=update_event).pack(fill="x", pady=2) # creates the button to adjust an event and its padding
+    tk.Button(left_frame, text="Delete Event (Make Sure To Select!)", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=delete_event).pack(fill="x", pady=2) # creates the button to delete an event and its padding
     csv_table() # runs the csv table function which takes from csv to show in table
