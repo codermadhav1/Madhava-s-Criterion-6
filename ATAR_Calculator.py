@@ -1,14 +1,14 @@
 import tkinter as tk # the librabries required for the atar calcvulator just these two which is to enter the atars and calculate based on the entered values
 from tkinter import messagebox, ttk # the messaeboix is required for messages that will come as pop ups
 # the layout code is same as the priorties, faq page, settings and upcimng events page
-def load_atar_page(app, arrivalPage="main_menu"): # the connection between the main menu and this page
+def load_atar_page(app, arrival_page="main_menu"): # the connection between the main menu and this page
     app.configure(bg="#6ba1c7") # the background color of this page
 
     home_title = tk.Frame(app, bg="#6ba1c7") # same thing creating a frame for the home button and title
     home_title.pack(fill="x", padx=20, pady=10) # the padding
 
     def home_back(): # the button to go back to the main menu
-        if arrivalPage == "main_menu": # basically is saying if home is clicked go to main menu
+        if arrival_page == "main_menu": # basically is saying if home is clicked go to main menu
             app.main_menu()
         else:
             app.login_page() # if not go to login page
@@ -17,11 +17,11 @@ def load_atar_page(app, arrivalPage="main_menu"): # the connection between the m
                            bg="#00ccd1", fg="white", command=home_back) # the creation of the button and assigns the command
     home_click.pack(side="left") # positioning
 
-    FAQTitle = tk.Label(home_title, text="ATAR Calculator", font=("Calibri", 18, "bold"), bg="#6ba1c7", fg="#00636e") # background and font color of the title
-    FAQTitle.pack(side="left", padx=20) # position and padding
+    atar_title = tk.Label(home_title, text="ATAR Calculator", font=("Calibri", 18, "bold"), bg="#6ba1c7", fg="#00636e") # background and font color of the title
+    atar_title.pack(side="left", padx=20) # position and padding
 
     def scaled_score(subject, raw_score): # the calculations required for the scaled and raw study score
-
+        # r is the raw score entered
         if raw_score > 50: # the max user settable score is 50 so if something else higher is entered it will set as 50
             r = 50 # sets as 50
         elif raw_score < 0: # if a user enters less than 0 raw it will register as 0
@@ -157,12 +157,12 @@ def load_atar_page(app, arrivalPage="main_menu"): # the connection between the m
     def calculate_atar():# this is the main function to calculate the atar score from the scaled subject scores
         scaled_scores = [] # creates an empty variable list
         
-        for subjectchoose, scorentry, scaledlbl in subject_rows: # grabbing the inputs and the subjects that were chosen from the combobox
-            subject = subjectchoose.get()
-            raw_text = scorentry.get().strip()
+        for choose_subject, score_entry, scaled_label in subject_rows: # grabbing the inputs and the subjects that were chosen from the combobox
+            subject = choose_subject.get()
+            raw_text = score_entry.get().strip()
 
             if not raw_text: # if raw text is empty or false it will clear the visible text of that box and replace it with a space
-                scaledlbl.config(text=" ")
+                scaled_label.config(text=" ")
                 continue # continue is to continue with the loop
 
             try: # if that were to not work it will try this which is what the manin goal is any way
@@ -174,7 +174,7 @@ def load_atar_page(app, arrivalPage="main_menu"): # the connection between the m
                 
                 scaled = scaled_score(subject, raw_score) # scaled is the scaled scores from the subjects that were chosen and the rawscore inputted byt the user
                 scaled_scores.append(scaled) # adds the scaled result to  the list
-                scaledlbl.config(text=f"Scaled: {scaled:.2f}") # scaled score displays right next to the entry box
+                scaled_label.config(text=f"Scaled: {scaled:.2f}") # scaled score displays right next to the entry box
             except ValueError: # creation of error message
                 messagebox.showwarning("error 11", "same as 10. it has to be interger") # error message
                 return
@@ -188,39 +188,39 @@ def load_atar_page(app, arrivalPage="main_menu"): # the connection between the m
 
         scaled_scores.sort(reverse=True) # sorts the scaled scores from highest to lowest
 
-        top4 = sum(scaled_scores[0:4]) # the top 4 being the top 4 scaled scores and get 100% of the scores added to the aggregate
-        bottom2 = sum(scaled_scores[4:6]) * 0.1 # the bottom 2 only account for 0.1 of each of themir scores
-        total_aggregate = top4 + bottom2 # aggreagte is calculated by adding these two variables
+        top_four = sum(scaled_scores[0:4]) # the top 4 being the top 4 scaled scores and get 100% of the scores added to the aggregate
+        bottom_two = sum(scaled_scores[4:6]) * 0.1 # the bottom 2 only account for 0.1 of each of themir scores
+        total_aggregate = top_four + bottom_two # aggreagte is calculated by adding these two variables
         final_atar = aggregate_to_atar(total_aggregate) # converts the aggreagate to atar to display it in the next message
         result_label.config(text=f"Aggregate: {total_aggregate:.2f} , Estimated ATAR: {final_atar:.2f}") # the message that will show with the calculated aggregate and the estimated atar
 
-    formf = tk.Frame(app, bg="#6ba1c7") # the formf stands for form fill with the 2 inputs labels required from the user and the frame created for it
-    formf.pack(fill="both", expand=True, padx=40, pady=10) # the padding and of the frame and also will stretch accordingly if requred
+    form_frame = tk.Frame(app, bg="#6ba1c7") # the form_frame stands for form frame with the 2 inputs labels required from the user and the frame created for it
+    form_frame.pack(fill="both", expand=True, padx=40, pady=10) # the padding and of the frame and also will stretch accordingly if requred
 
-    tk.Label(formf, text="select subject", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=0, sticky="w", pady=5) # the label for which subject to choose and also the positioning and padding
-    tk.Label(formf, text="enter raw score (integer)", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=1, sticky="w", padx=20, pady=5) # the label for the entry of the intended raw socre and its positiong and padding
-    tk.Label(formf, text="scaled result", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=2, sticky="w", pady=5) # the label with the title of scaled result which is the raw score plus the scaling
+    tk.Label(form_frame, text="select subject", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=0, sticky="w", pady=5) # the label for which subject to choose and also the positioning and padding
+    tk.Label(form_frame, text="enter raw score (integer)", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=1, sticky="w", padx=20, pady=5) # the label for the entry of the intended raw socre and its positiong and padding
+    tk.Label(form_frame, text="scaled result", font=("Calibri", 12, "bold"), bg="#6ba1c7", fg="white").grid(row=0, column=2, sticky="w", pady=5) # the label with the title of scaled result which is the raw score plus the scaling
 
     subject_options = ["Mathematical Methods", "Chemistry", "English", "Physics", "Biology", "Software Dev", "Buisness Management", "Physical Education", "General Maths"] # the subjects to choose from i couldnt add more because it is a long and boring thing to do so i kept it to the main ones
     subject_rows = [] # assings it as a empty list
 
     for i in range(6): # creating a loop that executues the code 6 times in this case the subjects to see which ones have been used
-        subjectchoose = tk.StringVar() # the selected subject is assigned to a string variable so it can be used in the calculations
-        subdrop = ttk.Combobox(formf, textvariable=subjectchoose, values= subject_options, state="readonly", width=25) # the combobox with the subject options to choose from
-        subdrop.grid(row=i+1, column=0, pady=6, sticky="w") # the paddng and positions
-        subdrop.current(i if i < len(subject_options) else 0) # used to prevent errors if i goes out of bounds so more than the subject choices that is currently 9
+        choose_subject = tk.StringVar() # the selected subject is assigned to a string variable so it can be used in the calculations
+        subject_dropbox = ttk.Combobox(form_frame, textvariable=choose_subject, values= subject_options, state="readonly", width=25) # the combobox with the subject options to choose from
+        subject_dropbox.grid(row=i+1, column=0, pady=6, sticky="w") # the paddng and positions
+        subject_dropbox.current(i if i < len(subject_options) else 0) # used to prevent errors if i goes out of bounds so more than the subject choices that is currently 9
 
-        score_ent = tk.Entry(formf, font=("Calibri", 11, "bold"), width=10) # the entry box for the raw scire
-        score_ent.grid(row=i+1, column=1, padx=20, pady=6, sticky="w") # the posiitong and padding of the entry box 
-        score_ent.insert(0, "30") # sets the scores to the starting average default value of 30
+        score_entry = tk.Entry(form_frame, font=("Calibri", 11, "bold"), width=10) # the entry box for the raw scire
+        score_entry.grid(row=i+1, column=1, padx=20, pady=6, sticky="w") # the posiitong and padding of the entry box 
+        score_entry.insert(0, "30") # sets the scores to the starting average default value of 30
 
-        scaledlbl = tk.Label(formf, font=("Calibri", 11, "bold"), bg="#6ba1c7", fg= "#00ccd1") # the message with the scaled score and the background and font color of it
-        scaledlbl.grid(row=i+1, column=2, sticky="w") # the positing
+        scaled_label = tk.Label(form_frame, font=("Calibri", 11, "bold"), bg="#6ba1c7", fg= "#00636e") # the message with the scaled score and the background and font color of it
+        scaled_label.grid(row=i+1, column=2, sticky="w") # the positing
 
-        subject_rows.append((subjectchoose, score_ent, scaledlbl)) # adds the subject chosen and the score entry and the scaled label to the list so it can be used in the calculations
+        subject_rows.append((choose_subject, score_entry, scaled_label)) # adds the subject chosen and the score entry and the scaled label to the list so it can be used in the calculations
 
-    calcbtn = tk.Button(formf, text="calculate ATAR", font=("Calibri", 12, "bold"), bg="#00636e", fg="white", padx=15, pady=5, command=calculate_atar) # creating the button that scales the raw score and sums it all to calculate the atar
-    calcbtn.grid(row=7, column=0, columnspan=3, pady=20) # the positong and padding
+    calculate_button = tk.Button(form_frame, text="calculate ATAR", font=("Calibri", 12, "bold"), bg="#00636e", fg="white", padx=15, pady=5, command=calculate_atar) # creating the button that scales the raw score and sums it all to calculate the atar
+    calculate_button.grid(row=7, column=0, columnspan=3, pady=20) # the positong and padding
 
-    result_label = tk.Label(formf, text="enter scores and click calculate", font=("Calibri", 14, "bold"), bg="#6ba1c7", fg="#00636e") # the message at the bottom of the screen to indicate to users what to do
+    result_label = tk.Label(form_frame, text="enter scores and click calculate", font=("Calibri", 14, "bold"), bg="#6ba1c7", fg="#00636e") # the message at the bottom of the screen to indicate to users what to do
     result_label.grid(row=8, column=0, columnspan=3, pady=5) # positiong and padding 

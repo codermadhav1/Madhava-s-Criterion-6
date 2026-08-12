@@ -5,14 +5,14 @@ import os
 
 UE_Csv = "UE.csv" # UE_Csv is the csv file where the categories are svaed to
 
-def load_UE_Page(app, arrivalPage="main_menu"): # the connections between the main menu pae and this page
+def load_UE_Page(app, arrival_page="main_menu"): # the connections between the main menu pae and this page
     app.configure(bg="#6ba1c7")  # the background color of this page
 
     home_title = tk.Frame(app, bg="#6ba1c7") # same thing creating a frame for the home button and title
     home_title.pack(fill="x", padx=20, pady=10) # the padding
 
     def home_back(): # the button to go back to the main menu
-        if arrivalPage == "main_menu": # basically is saying if home is clicked go to main menu
+        if arrival_page == "main_menu": # basically is saying if home is clicked go to main menu
             app.main_menu()
         else:
             app.login_page() # if not go to login page
@@ -21,8 +21,8 @@ def load_UE_Page(app, arrivalPage="main_menu"): # the connections between the ma
                            bg="#00ccd1", fg="white", command=home_back) # the creation of the button and assigns the command
     home_click.pack(side="left") # positioning
 
-    FAQTitle = tk.Label(home_title, text="Upcoming Events", font=("Calibri", 18, "bold"), bg="#6ba1c7", fg="#00636e") # background and font color of the title
-    FAQTitle.pack(side="left", padx=20) # position and padding
+    ue_title = tk.Label(home_title, text="Upcoming Events", font=("Calibri", 18, "bold"), bg="#6ba1c7", fg="#00636e") # background and font color of the title
+    ue_title.pack(side="left", padx=20) # position and padding
  # copied ths sectiom from the priorites section as it would benefit from a similar layout
     main_frame = tk.Frame(app, bg="#6ba1c7") # creating a frame to hold the elements
     main_frame.pack(fill="both", expand=True, padx=20, pady=10) # padding for the frame
@@ -81,7 +81,7 @@ def load_UE_Page(app, arrivalPage="main_menu"): # the connections between the ma
         save_csv_table() # runs the save function
         clear_input() #clears input ready for next input
 
-    def upd_event(): # the function to adjust an already exisiting event
+    def update_event(): # the function to adjust an already exisiting event
         select_item = table_UE.selection() # select an item fromt he table
         if not select_item: # if nothing is selected
             messagebox.showerror("Error 5", "select something to change") # it will displasy this error message
@@ -95,7 +95,7 @@ def load_UE_Page(app, arrivalPage="main_menu"): # the connections between the ma
         save_csv_table() # saves the changes to the csv file
         clear_input() # clears input ready for next input
 
-    def del_event(): # the function to delete a upcoming vent
+    def delete_event(): # the function to delete a upcoming vent
         select_item = table_UE.selection() # the item that is selected from the table
         if not select_item: # an error messgae if nothing is selected to be delete
             messagebox.showerror("Error 7", "select to delete") # the error message
@@ -110,6 +110,6 @@ def load_UE_Page(app, arrivalPage="main_menu"): # the connections between the ma
         table_UE.selection_remove(table_UE.selection()) # clears the selection from the table
     
     tk.Button(left_frame, text="Add event", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=add_event).pack(fill="x", pady=2) # creates the button to create an event and its padding
-    tk.Button(left_frame, text="Adjust event (make sure it selected)", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=upd_event).pack(fill="x", pady=2) # creates the button to adjust an event and its padding
-    tk.Button(left_frame, text="Delete event (make sure it selected)", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=del_event).pack(fill="x", pady=2) # creates the button to delete an event and its padding
+    tk.Button(left_frame, text="Adjust event (make sure it selected)", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=update_event).pack(fill="x", pady=2) # creates the button to adjust an event and its padding
+    tk.Button(left_frame, text="Delete event (make sure it selected)", font=("Calibri", 11, "bold"), bg="#00ccd1", fg="white", command=delete_event).pack(fill="x", pady=2) # creates the button to delete an event and its padding
     csv_table() # runs the csv table function which takes from csv to show in table

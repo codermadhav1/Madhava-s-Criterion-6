@@ -3,7 +3,7 @@ import os
 import csv
 import tkinter as tk
 from tkinter import messagebox
-# UDF stands for user database file for the passwords and usernames of this application
+# the passwords and usernames of this application are stoed in this csv file
 user_data_file = "users.csv"
 # basically means if the file or folder doesn not exists it will create the file with the username and password columns in the csv file
 if not os.path.exists(user_data_file):
