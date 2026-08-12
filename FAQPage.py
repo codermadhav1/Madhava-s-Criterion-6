@@ -1,14 +1,14 @@
 import tkinter as tk # imports tkinter to create the gui and its elemetns
 import webbrowser # imports webbrowser becuase i need to put a loink to the error form and gather feedback
 
-def load_FAQ_page(app, arrivalPage="main_menu"): # this is the configuration of the build of this feature
+def load_FAQ_page(app, arrival_page="main_menu"): # this is the configuration of the build of this feature
     app.configure(bg="#6ba1c7") # backhground of this
 
     home_title = tk.Frame(app, bg="#6ba1c7") # creates a frame for the back to home button and the title container
     home_title.pack(fill="x", padx=20, pady=10) # padding
 
     def home_back(): # take the user back to main menu unless if something breaks in which will go back to loign page
-        if arrivalPage == "main_menu":
+        if arrival_page == "main_menu":
             app.main_menu()
         else:
             app.login_page()
@@ -17,8 +17,8 @@ def load_FAQ_page(app, arrivalPage="main_menu"): # this is the configuration of 
                            bg="#00ccd1", fg="white", command=home_back) # creating the back home button
     home_click.pack(side="left") # position of this button
 
-    FAQTitle = tk.Label(home_title, text="Frequently Asked Questions", font=("Calibri", 18, "bold"), bg="#6ba1c7", fg="#00636e") # title of this function appearing at the top
-    FAQTitle.pack(side="left", padx=20) # positioning & padding
+    FAQ_title = tk.Label(home_title, text="Frequently Asked Questions", font=("Calibri", 18, "bold"), bg="#6ba1c7", fg="#00636e") # title of this function appearing at the top
+    FAQ_title.pack(side="left", padx=20) # positioning & padding
 
     contents = tk.Frame(app, bg="#6ba1c7") # creating a frame to hold all the question and answers in the faq page
     contents.pack(fill="both", expand=True, padx=20, pady=20) # positioning

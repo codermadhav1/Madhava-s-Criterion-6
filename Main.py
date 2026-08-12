@@ -108,9 +108,9 @@ class App(tk.Tk):
         try: # images for the various icons that are present
             self.FAQ_icon = tk.PhotoImage(file="FAQbutton.png") # faq icon
             self.Settings_icon = tk.PhotoImage(file="Settingsbutton.png") # settings icon
-            self.picon = tk.PhotoImage(file="Prioritiesbutton.png") # priorities icon
-            self.aicon = tk.PhotoImage(file="ATARButton.png") # atar icon
-            self.UEicon = tk.PhotoImage(file="UEbutton.png") # upcoming events icon
+            self.priority_icon = tk.PhotoImage(file="Prioritiesbutton.png") # priorities icon
+            self.atar_icon = tk.PhotoImage(file="ATARButton.png") # atar icon
+            self.ue_icon = tk.PhotoImage(file="UEbutton.png") # upcoming events icon
         except tk.TclError: # error if the images arent in the correct place
             messagebox.showerror("Error 1: madhava has forgotten to put correct image files!") # this error can be entered in the error form in faq page
             return
@@ -149,17 +149,17 @@ class App(tk.Tk):
         FAQ_button.pack(side="right", padx=(5, 0)) # the padding
 
         # creating a button for all three features of the app so the user can use them
-        priority_btn = tk.Button(self, image=self.picon, text="\nPriorities", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
+        priority_btn = tk.Button(self, image=self.priority_icon, text="\nPriorities", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
                                     activebackground="#00a3a6", activeforeground="white", compound="top", command=self.priorities) # here i use activeforegoud which is wehen it is clicked it will show that color
         priority_btn.grid(row=2, column=0, sticky="nsew", padx=20,  pady=20) # padding
 
         
-        atar_btn = tk.Button(self, image=self.aicon, text="\nATAR Calculator", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
+        atar_btn = tk.Button(self, image=self.atar_icon, text="\nATAR Calculator", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
                                     activebackground="#00a3a6", activeforeground="white", compound="top", command=self.atar_calc)
         atar_btn.grid(row=2, column=1, sticky="nsew", padx=20,  pady=20) # padding
 
         
-        upcoming_events_btn = tk.Button(self, image=self.UEicon, text="\nUpcoming Events", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
+        upcoming_events_btn = tk.Button(self, image=self.ue_icon, text="\nUpcoming Events", font=("Calibri", 14,"bold"), bg="#00ccd1", fg="white",
                                     activebackground="#00a3a6", activeforeground="white", compound="top", command=self.events_page)
         upcoming_events_btn.grid(row=2, column=2, sticky="nsew", padx=20,  pady=20) # padding
         # logout button creation of it
