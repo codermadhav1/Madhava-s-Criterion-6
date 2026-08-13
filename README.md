@@ -1,6 +1,6 @@
 Madhava's Criterion 6
 
-# how i made the app
+# Priority App Instructions & Description
 How to run the app: Go to Main.py in this folder and run it, it will run the whole application.
 Developer Name: Madhava
 GitHub Name: codermadhav1
