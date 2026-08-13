@@ -1,3 +1,9 @@
-# Madhava's Criterion 6
+Madhava's Criterion 6
 
-# name, Simple description, features,  works, how login works, project structure, how the atar calculaotr current state, how to run the app, how i made the app
+# how i made the app
+How to run the app: Go to Main.py in this folder and run it, it will run the whole application.
+Developer Name: Madhava
+GitHub Name: codermadhav1
+Link to GitHub Page: https://github.com/codermadhav1/Madhava-s-Criterion-6
+App Name: Priority App
+Description: This is a application to track prirorites based on difficulty and proximity to the due date. Also can calculate ATAR from the data source which is the scaling report this was used because it is the accurate source in order to convert vce study scores in ATAR form. It also features and upcoming events tab where a user can enter upcoming events along with the date of the event and the app will be able to remember and display said events. This application also uses a login system where the user cna create a username and password and gets saved to a Csv file so it is remebered for next time and also the login feature works from using data saved in the csv file and check wheteher the username and password exist within the csv file. There is also a FAQ page so users can hopefully have some questions answered if required and is also linked to a support form they can use in order to get help with using the app or report a bug they have found which can help them and help me make this application better. There is also a settings page where the user can change their username and password. The way i created this app is by looking at previous class examples and going through some of the modules on the w3schools website and also from youtube videos to helo me build out the features that made up this application. The github link shows the version history however it only shows after all the code was written because i had only learnt how to user github after the winter break where Tim had helped me set it up. Thanks for reading this!
