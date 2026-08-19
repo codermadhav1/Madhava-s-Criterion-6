@@ -208,8 +208,8 @@ class App(tk.Tk):
         correct_username = self.username.get().strip()
         correct_password = self.password.get().strip()
         # input validation for the login
-        if not correct_username or not correct_password:
-            messagebox.showwarning("error 2", "wrong user or password or you have to enter everything") # error message 
+        # if not correct_username or not correct_password:
+        #     messagebox.showwarning("error 2", "wrong user or password or you have to enter everything") # error message 
         
         valid_user = False # i set it to false so if it is empty it wont let them through unless it is in the udf.csv file
         with open(user_data_file, mode='r') as file: # checks the file
