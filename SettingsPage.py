@@ -46,6 +46,13 @@ def load_settings_page(app, arrival_page="main_menu"):
             for row in reader:
                 rows.append(row) # depnds on username on password it changes both when a new is entered
 
+        if new_username != app.current_user: # added during alpha testing basically a validation to check if the user already exists and doesnt let the user change to a username that already exists
+            for row in rows:
+                if row['username'] == new_username:
+                    messagebox.showwarning("Error 11", "This Username is already in use!")
+                    return
+        
+
         for row in rows:
             if row['username'] == app.current_user: # displays the new one next tie trying to change again
                 row['username'] = new_username # sets the new username as the standard login credentials
