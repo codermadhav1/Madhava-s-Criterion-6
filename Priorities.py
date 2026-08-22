@@ -122,6 +122,13 @@ def load_priorities_page(app, arrival_page="main_menu"): # the connection betwee
         if not task_title or score_calculations(date_title, difficulty_title)[1] is None: # error message creation
             messagebox.showerror("Error 8", "you have got to check inputs. also you can only use dd/mm/yy") # the error message 
             return
+
+        existing_rows = csv_rows() # added during alpha testing basically to presevent from 2 tasks to have the same name
+        if any(row[0].strip().lower() == task_title.lower() for row in existing_rows):
+            messagebox.showerror("Error 16", "cant have the same name as another task")
+            return
+
+
         save_rows(csv_rows() + [[task_title, difficulty_title, date_title]]) # saves the changes
     
     def modify_priority(is_delete=False): # the function to modify an already created priority
@@ -141,6 +148,11 @@ def load_priorities_page(app, arrival_page="main_menu"): # the connection betwee
             if not task_title or score_calculations(date_title, difficulty_title)[1] is None: # an error message creation
                 messagebox.showerror("Error 8", "you have got to check inputs. also you can only use dd/mm/yy") # the actual error message
                 return
+
+            for i, row in enumerate(rows): # added during alpha testing to prevent from having 2 tasks from having the same name.
+                if i != index and row[0].strip().lower() == task_title.lower():
+                    messagebox.showerror("Error 17", "Cant have the smae name as another task!")
+                    return
             
             rows[index] = [task_title, difficulty_title, date_title] # assigning rows index to these variables
 

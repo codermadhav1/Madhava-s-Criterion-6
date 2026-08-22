@@ -155,8 +155,10 @@ def load_atar_page(app, arrival_page="main_menu"): # the connection between the 
         else: return 40.00
         
     def calculate_atar():# this is the main function to calculate the atar score from the scaled subject scores
-        scaled_scores = [] # creates an empty variable list
-        
+
+        english_scaled = None # added during alpha test to ensure english is a mandatory subject adn ncluded in top 4 calcularions
+        other_scaled_scores = [] # other being the other 5 subjects
+
         for choose_subject, score_entry, scaled_label in subject_rows: # grabbing the inputs and the subjects that were chosen from the combobox
             subject = choose_subject.get()
             raw_text = score_entry.get().strip()
@@ -173,23 +175,30 @@ def load_atar_page(app, arrival_page="main_menu"): # the connection between the 
                     return
                 
                 scaled = scaled_score(subject, raw_score) # scaled is the scaled scores from the subjects that were chosen and the rawscore inputted byt the user
-                scaled_scores.append(scaled) # adds the scaled result to  the list
                 scaled_label.config(text=f"Scaled: {scaled:.2f}") # scaled score displays right next to the entry box
+
+                if subject == "English": # ensuring enhlish is included in the top 4 calculations
+                    english_scaled = scaled # code loops through rows if its english it saves to the english_scaled spt 
+                else:
+                    other_scaled_scores.append(scaled) # adds the other scaled scores after english
             except ValueError: # creation of error message
                 messagebox.showwarning("error 11", "same as 10. it has to be interger") # error message
                 return
-        
-        if not scaled_scores: # if there is a missing scaled score or incorrect input
-            messagebox.showwarning("error 12", "Please enter a score required for all them") # it will show this error message
+
+        if english_scaled is None: # Vcaa requires the study of english so it must be included 
+            messagebox.showerror("error 18", "english is mandatory as by vcaa so you must include it.") # if englis scaled is none/empty it popus up an error message 
             return
-            
-        while len(scaled_scores) < 6: # if less than 6 sccaled scores it will add 0.0 to the end of the list to have 6 to calculate as there would be an error otherwise
-            scaled_scores.append(0.0)
 
-        scaled_scores.sort(reverse=True) # sorts the scaled scores from highest to lowest
+        other_scaled_scores.sort(reverse=True) # sorts the remaining scaled scores from highest to lowest
 
-        top_four = sum(scaled_scores[0:4]) # the top 4 being the top 4 scaled scores and get 100% of the scores added to the aggregate
-        bottom_two = sum(scaled_scores[4:6]) * 0.1 # the bottom 2 only account for 0.1 of each of themir scores
+        best_three = other_scaled_scores[0:3] # grabbing the other 4 best subjects from the scaled scores list
+        top_four = english_scaled + sum(best_three) #top four consists of the scaled english score and the sum of the next baest subjects.
+
+        leftover_subjects = other_scaled_scores [3:] # left over being the ones after the top 3 
+        while len(leftover_subjects) < 2: # making sure the bottom two subjects only get 0.1 of their actual score into aggregate calculations
+            leftover_subjects.append(0.0)
+        bottom_two = sum(leftover_subjects[0:2]) * 0.1
+
         total_aggregate = top_four + bottom_two # aggreagte is calculated by adding these two variables
         final_atar = aggregate_to_atar(total_aggregate) # converts the aggreagate to atar to display it in the next message
         result_label.config(text=f"Aggregate: {total_aggregate:.2f} , Estimated ATAR: {final_atar:.2f}") # the message that will show with the calculated aggregate and the estimated atar
@@ -204,12 +213,22 @@ def load_atar_page(app, arrival_page="main_menu"): # the connection between the 
     subject_options = ["Mathematical Methods", "Chemistry", "English", "Physics", "Biology", "Software Dev", "Buisness Management", "Physical Education", "General Maths"] # the subjects to choose from i couldnt add more because it is a long and boring thing to do so i kept it to the main ones
     subject_rows = [] # assings it as a empty list
 
+    def update_subject_dropbox(*args):  # added during alpha testing 
+        selected_subjects = [var.get() for var, _, _ in subject_rows if var.get()] # loops through the rows looks at what subject is currenyl vchosen and lists them so code knows which ones are in use
+        for var, _, _ in subject_rows:
+            current_value = var.get()
+            var.dropbox_widget['values'] = [selects for selects in subject_options if selects == current_value or selects not in selected_subjects] # updates the options available in each dropbox and filters through the subjects an hdes subjects alr picked
+
+
     for i in range(6): # creating a loop that executues the code 6 times in this case the subjects to see which ones have been used
         choose_subject = tk.StringVar() # the selected subject is assigned to a string variable so it can be used in the calculations
         subject_dropbox = ttk.Combobox(form_frame, textvariable=choose_subject, values= subject_options, state="readonly", width=25) # the combobox with the subject options to choose from
         subject_dropbox.grid(row=i+1, column=0, pady=6, sticky="w") # the paddng and positions
         subject_dropbox.current(i if i < len(subject_options) else 0) # used to prevent errors if i goes out of bounds so more than the subject choices that is currently 9
 
+        choose_subject.dropbox_widget = subject_dropbox # attaches the dropbox directly into the choose_subject variable
+        choose_subject.trace_add("write", update_subject_dropbox) # added during alpha testing tells tkinter to watch the sring vairbale and whenever it changes tkinter calls the function update_subject_dropbox()
+        
         score_entry = tk.Entry(form_frame, font=("Calibri", 11, "bold"), width=10) # the entry box for the raw scire
         score_entry.grid(row=i+1, column=1, padx=20, pady=6, sticky="w") # the posiitong and padding of the entry box 
         score_entry.insert(0, "30") # sets the scores to the starting average default value of 30
@@ -218,6 +237,8 @@ def load_atar_page(app, arrival_page="main_menu"): # the connection between the 
         scaled_label.grid(row=i+1, column=2, sticky="w") # the positing
 
         subject_rows.append((choose_subject, score_entry, scaled_label)) # adds the subject chosen and the score entry and the scaled label to the list so it can be used in the calculations
+
+    update_subject_dropbox() # added during alpha testing and it right away runs at the start to apply the duplicate restiction for subjects
 
     calculate_button = tk.Button(form_frame, text="Calculate ATAR", font=("Calibri", 12, "bold"), bg="#00636e", fg="white", padx=15, pady=5, command=calculate_atar) # creating the button that scales the raw score and sums it all to calculate the atar
     calculate_button.grid(row=7, column=0, columnspan=3, pady=20) # the positong and padding

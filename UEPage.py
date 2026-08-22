@@ -2,6 +2,7 @@ import tkinter as tk # these are the librabries used in the upcoming events sect
 import csv # it should also be noted that the upcoming events is basically the first version of the priorites but eventaully became a sepersate feature
 from tkinter import messagebox, ttk
 import os
+from datetime import datetime # added during alpha testing as i advanced a feature of upcoming evnts
 
 UE_Csv = "UE.csv" # UE_Csv is the csv file where the categories are svaed to
 
@@ -58,11 +59,29 @@ def load_UE_Page(app, arrival_page="main_menu"): # the connections between the m
                 writer = csv.writer(file) # this prepares and writes headers into the csv file
                 writer.writerow(["title", "date"]) # the headers for the csv file
             return
+
+        today = datetime.now().date() # making it easier for what today is in a shorther format
+        valid_rows = [] # creating an empty list
         
         with open(UE_Csv, mode='r', newline='') as file: # this is the opening of the file to be able to be see in the table
             reader = csv.DictReader(file) # converts each row into a dictionary
             for row in reader: # loops through the csv one file at a time
-                table_UE.insert("", "end", values=(row["title"], row["date"])) # inseret new row into the table
+                try: # added during alpha testing
+                    if not row.get("date"): # if in invalid format it skips over it
+                        continue
+                    event_date = datetime.strptime(row["date"], "%d/%m/%Y").date() # the event date grabbed from the csv file in the format of dd/mm/yyyy
+                    if event_date >= today: # if the date is after today
+                        valid_rows.append(row) # it will be added to the date row
+                        table_UE.insert("", "end", values=(row["title"], row["date"])) # inseret new row into the table
+                except ValueError:
+                    continue
+
+        with open(UE_Csv, mode='w', newline='') as file: # opens csv file in write mode
+            writer = csv.writer(file) # creates a writer object
+            writer.writerow(["title", "date"]) # writes the header row at the top of the csv file program
+            for row in valid_rows:  # starts a loop
+                writer.writerow([row["title"], row["date"]]) # writes unexpired events title and date in the csv file
+
 
     def save_csv_table(): # does the opposite of the last one as it takes the current data displayed in the table to the csv file
         with open(UE_Csv, mode='w', newline='') as file: # opens the csv file in write mode
@@ -77,6 +96,23 @@ def load_UE_Page(app, arrival_page="main_menu"): # the connections between the m
         if not title or not date: # checks if the date or title box is empty
             messagebox.showerror("Error 4", "got to fill in both") # it will return an error message if it is empty
             return
+
+        try: # added during alpha testing
+           event_date = datetime.strptime(date, "%d/%m/%Y").date() # tries to read the text in the correct format of dd/mm/yyyy
+        except ValueError: # if not in that format it throws this error which makes sure it is in correct format
+            messagebox.showerror("Error 22", "date must be in DD/MM/YYYY format")
+            return
+
+        if event_date < datetime.now().date(): # added during alpha testing
+            messagebox.showerror("error 24", "Cannot add events that have already have past dates.") # error message if the date trying to enter is before today
+            return
+
+        for item in table_UE.get_children(): # added during alpha testing this lines asks the table for a list of all the current rows and looks 1 by 1
+            existing_event = table_UE.item(item)["values"][0] # this checks the data dictionary and uses the value at index 0 which is event name
+            if existing_event.lower() == title.lower(): #this takes whatever the user has and switches it to lowercase and checks if they match if they do
+                messagebox.showerror("Error 19", "Event has duplicate name as another event change it.") # it gives this error
+                return 
+
         table_UE.insert("", "end", values=(title, date)) # if valid adds a brand new row at the bottom of the table
         save_csv_table() # runs the save function
         clear_input() #clears input ready for next input
@@ -91,6 +127,25 @@ def load_UE_Page(app, arrival_page="main_menu"): # the connections between the m
         if not title or not date: # checks if it is empty or not
             messagebox.showerror("Error 6", "cannot be empty") # error messgae if it is empty
             return
+
+        try: # added during alpha testing
+           event_date = datetime.strptime(date, "%d/%m/%Y").date() # tries to read the text in the correct format of dd/mm/yyyy
+        except ValueError: # if not in that format it throws this error to ensure it is in the correct formart
+            messagebox.showerror("Error 23", "date must be in DD/MM/YYYY format")
+            return
+
+        if event_date < datetime.now().date(): # added during alpha testing
+                    messagebox.showerror("error 25", "Cannot add events that have already have past dates.") # error message if the date trying to enter is before today
+                    return
+
+        for item in table_UE.get_children(): # added during alpha testing looks at the table and checks the current rows by looking at them 1 at a time
+            if item == select_item[0]: # compares the row to the one being currently looked at against the exact row the user clicked to update
+                continue 
+            existing_event = table_UE.item(item)["values"][0] # pulls the event name from any other row to check agains it
+            if existing_event.lower() == title.lower(): # performs the same lowercase string compariosn as the one in add event.
+                messagebox.showerror("Error 20", "Another event already has this name so it has to be different.") # this error will occur if there is adjusting an event to another one with the same name
+                return
+
         table_UE.item(select_item, values=(title, date)) # select and returns the tuple
         save_csv_table() # saves the changes to the csv file
         clear_input() # clears input ready for next input
